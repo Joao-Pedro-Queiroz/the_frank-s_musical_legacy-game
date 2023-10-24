@@ -12,6 +12,8 @@ class RoomBegin:
         for event in pygame.event.get(): # Retorna uma lista com todos os eventos que ocorreram desde a última vez que essa função foi chamada
             if event.type == pygame.QUIT: 
                 return -1
+            
+        return 0
 
     
     def desenha(self, window):
@@ -30,6 +32,8 @@ class RoomBoss1:
         for event in pygame.event.get(): # Retorna uma lista com todos os eventos que ocorreram desde a última vez que essa função foi chamada
             if event.type == pygame.QUIT: 
                 return -1
+            
+        return 1
 
     
     def desenha(self, window):
@@ -48,6 +52,8 @@ class RoomBoss2:
         for event in pygame.event.get(): # Retorna uma lista com todos os eventos que ocorreram desde a última vez que essa função foi chamada
             if event.type == pygame.QUIT: 
                 return -1
+            
+        return 2
 
     
     def desenha(self, window):
@@ -66,6 +72,8 @@ class RoomBoss3:
         for event in pygame.event.get(): # Retorna uma lista com todos os eventos que ocorreram desde a última vez que essa função foi chamada
             if event.type == pygame.QUIT: 
                 return -1
+            
+        return 3
 
     
     def desenha(self, window):
@@ -84,6 +92,8 @@ class RoomFinal:
         for event in pygame.event.get(): # Retorna uma lista com todos os eventos que ocorreram desde a última vez que essa função foi chamada
             if event.type == pygame.QUIT: 
                 return -1
+            
+        return 4
 
     
     def desenha(self, window):
