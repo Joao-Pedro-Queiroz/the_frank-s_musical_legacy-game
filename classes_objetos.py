@@ -1,6 +1,6 @@
 import pygame
 
-class Tiro:
+class Tiro(pygame.sprite.Sprite):
     def __init__(self, state, assets):
         self.largura_tela = state['tela_dimen'][0]
         self.altura_tela = state['tela_dimen'][1]
@@ -11,7 +11,7 @@ class Tiro:
     
     def desenha(self, window):
 
-class Paredes:
+class Paredes(pygame.sprite.Sprite):
     def __init__(self, state, assets):
         self.largura_tela = state['tela_dimen'][0]
         self.altura_tela = state['tela_dimen'][1]
@@ -32,7 +32,7 @@ class Paredes:
     def desenha_paredes_contorno(self, window):
 
 
-class Hazzard:
+class Hazzard(pygame.sprite.Sprite):
     def __init__(self, state, assets):
         self.largura_tela = state['tela_dimen'][0]
         self.altura_tela = state['tela_dimen'][1]
