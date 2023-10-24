@@ -1,9 +1,9 @@
 import pygame
 
 class Jogador:
-    def __init__(self, largura_tela, altura_tela):
-        self.largura_tela = largura_tela
-        self.aktura_tela = altura_tela
+    def __init__(self, state, assets):
+        self.largura_tela = state['tela_dimen'][0]
+        self.altura_tela = state['tela_dimen'][1]
         
 
     def atualiza_estado(self):
@@ -13,9 +13,9 @@ class Jogador:
 
 
 class Boss1:
-    def __init__(self, largura_tela, altura_tela):
-        self.largura_tela = largura_tela
-        self.aktura_tela = altura_tela
+    def __init__(self, state, assets):
+        self.largura_tela = state['tela_dimen'][0]
+        self.altura_tela = state['tela_dimen'][1]
         
 
     def atualiza_estado(self):
@@ -25,9 +25,9 @@ class Boss1:
 
 
 class Boss2:
-    def __init__(self, largura_tela, altura_tela):
-        self.largura_tela = largura_tela
-        self.aktura_tela = altura_tela
+    def __init__(self, state, assets):
+        self.largura_tela = state['tela_dimen'][0]
+        self.altura_tela = state['tela_dimen'][1]
         
 
     def atualiza_estado(self):
@@ -37,9 +37,9 @@ class Boss2:
 
 
 class Boss3:
-    def __init__(self, largura_tela, altura_tela):
-        self.largura_tela = largura_tela
-        self.aktura_tela = altura_tela
+    def __init__(self, state, assets):
+        self.largura_tela = state['tela_dimen'][0]
+        self.altura_tela = state['tela_dimen'][1]
         
 
     def atualiza_estado(self):
