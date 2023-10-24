@@ -1,5 +1,17 @@
 import pygame
 
+class Tiro:
+    def __init__(self, largura_tela, altura_tela):
+        self.largura_tela = largura_tela
+        self.aktura_tela = altura_tela
+        
+
+    def atualiza_estado(self):
+
+    
+    def desenha(self, window):
+
+
 class Parede:
     def __init__(self, largura_tela, altura_tela):
         self.largura_tela = largura_tela
