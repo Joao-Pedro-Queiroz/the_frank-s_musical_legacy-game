@@ -7,7 +7,6 @@ class Jogador:
         
 
     def atualiza_estado(self):
-
     
     def desenha(self, window):
 

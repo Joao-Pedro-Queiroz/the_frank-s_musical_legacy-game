@@ -11,7 +11,6 @@ class Tiro:
     
     def desenha(self, window):
 
-
 class Paredes:
     def __init__(self, state, assets):
         self.largura_tela = state['tela_dimen'][0]
