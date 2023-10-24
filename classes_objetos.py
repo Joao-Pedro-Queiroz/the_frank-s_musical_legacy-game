@@ -1,9 +1,9 @@
 import pygame
 
 class Tiro:
-    def __init__(self, largura_tela, altura_tela):
-        self.largura_tela = largura_tela
-        self.aktura_tela = altura_tela
+    def __init__(self, state, assets):
+        self.largura_tela = state['tela_dimen'][0]
+        self.altura_tela = state['tela_dimen'][1]
         
 
     def atualiza_estado(self):
@@ -13,9 +13,9 @@ class Tiro:
 
 
 class Parede:
-    def __init__(self, largura_tela, altura_tela):
-        self.largura_tela = largura_tela
-        self.aktura_tela = altura_tela
+    def __init__(self, state, assets):
+        self.largura_tela = state['tela_dimen'][0]
+        self.altura_tela = state['tela_dimen'][1]
         
 
     def atualiza_estado(self):
@@ -24,34 +24,10 @@ class Parede:
     def desenha(self, window):
 
 
-class Lava:
-    def __init__(self, largura_tela, altura_tela):
-        self.largura_tela = largura_tela
-        self.aktura_tela = altura_tela
-        
-
-    def atualiza_estado(self):
-
-    
-    def desenha(self, window):
-
-
-class Veneno:
-    def __init__(self, largura_tela, altura_tela):
-        self.largura_tela = largura_tela
-        self.aktura_tela = altura_tela
-        
-
-    def atualiza_estado(self):
-
-    
-    def desenha(self, window):
-
-
-class MateriaEscura:
-    def __init__(self, largura_tela, altura_tela):
-        self.largura_tela = largura_tela
-        self.aktura_tela = altura_tela
+class Hazzard:
+    def __init__(self, state, assets):
+        self.largura_tela = state['tela_dimen'][0]
+        self.altura_tela = state['tela_dimen'][1]
         
 
     def atualiza_estado(self):
