@@ -1,5 +1,9 @@
+import pygame
+
 class Parede:
-    def __init__(self):
+    def __init__(self, largura_tela, altura_tela):
+        self.largura_tela = largura_tela
+        self.aktura_tela = altura_tela
         
 
     def atualiza_estado(self):
@@ -9,7 +13,9 @@ class Parede:
 
 
 class Lava:
-    def __init__(self):
+    def __init__(self, largura_tela, altura_tela):
+        self.largura_tela = largura_tela
+        self.aktura_tela = altura_tela
         
 
     def atualiza_estado(self):
@@ -19,7 +25,9 @@ class Lava:
 
 
 class Veneno:
-    def __init__(self):
+    def __init__(self, largura_tela, altura_tela):
+        self.largura_tela = largura_tela
+        self.aktura_tela = altura_tela
         
 
     def atualiza_estado(self):
@@ -29,7 +37,9 @@ class Veneno:
 
 
 class MateriaEscura:
-    def __init__(self):
+    def __init__(self, largura_tela, altura_tela):
+        self.largura_tela = largura_tela
+        self.aktura_tela = altura_tela
         
 
     def atualiza_estado(self):
