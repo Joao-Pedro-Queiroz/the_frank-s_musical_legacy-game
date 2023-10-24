@@ -4,18 +4,23 @@ from classes_telas import RoomBegin, RoomBoss1, RoomBoss2, RoomBoss3, RoomFinal,
 class Jogo:
     def __init__(self):
         pygame.init()
-        self.largura_tela = 1200
-        self.altura_tela = 800
-        self.fonte_padrao = pygame.font.get_default_font() # Carrega a fonte padrão
-        self.window = pygame.display.set_mode((self.largura_tela, self.altura_tela))
+        self.window = pygame.display.set_mode((1200, 800))
         pygame.display.set_caption('No Name') # Define o título da janela
-        self.indice_tela_atual = 0
-        self.modo_ritimado = False
-        self.telas = [TelaInicial(self.largura_tela, self.altura_tela), RoomBegin(self.largura_tela, self.altura_tela), RoomBoss1(self.largura_tela, self.altura_tela), RoomBoss2(self.largura_tela, self.altura_tela), RoomBoss3(self.largura_tela, self.altura_tela), RoomFinal(self.largura_tela, self.altura_tela)]
+
+        self.assets = {
+            'fonte_padrao': pygame.font.get_default_font()
+        }
+        self.state = {
+            'tela_atual': 0,
+            'tela_dimen': (1200, 800),
+            'main_clock': pygame.time.Clock()
+            }
+        
+        self.telas = [TelaInicial(self.state['tela_dimen']), RoomBegin(self.state['tela_dimen']), RoomBoss1(self.state['tela_dimen']), RoomBoss2(self.state['tela_dimen']), RoomBoss3(self.state['tela_dimen']), RoomFinal(self.state['tela_dimen'])]
 
 
     def game_loop(self):
-        tela_atual = self.telas[self.indice_tela_atual]
+        tela_atual = self.telas[self.state['tela_atual']]
 
         rodando = True
         while rodando:

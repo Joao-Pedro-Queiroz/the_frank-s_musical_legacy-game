@@ -3,9 +3,9 @@ from classes_personagens import Jogador, Boss1, Boss2, Boss3
 from classes_objetos import Lava, Parede, Veneno, MateriaEscura
 
 class TelaInicial:
-    def __init__(self, largura_tela, altura_tela):
-        self.largura_tela = largura_tela
-        self.altura_tela = altura_tela
+    def __init__(self, state, assets):
+        self.largura_tela = state['tela_dimen'][0]
+        self.altura_tela = state['tela_dimen'][1]
         self.fonte_padrao = pygame.font.get_default_font() # Carrega a fonte padrão
         self.font_texto = pygame.font.Font(self.fonte_padrao, 16)
         self.font_nome_jogo = pygame.font.Font(self.fonte_padrao, 20)
@@ -61,9 +61,9 @@ class TelaInicial:
 
 
 class RoomBegin:
-    def __init__(self, largura_tela, altura_tela):
-        self.largura_tela = largura_tela
-        self.altura_tela = altura_tela
+    def __init__(self, state, assets):
+        self.largura_tela = state['tela_dimen'][0]
+        self.altura_tela = state['tela_dimen'][1]
 
 
     def atualiza_estado(self):
@@ -81,9 +81,9 @@ class RoomBegin:
 
 
 class RoomBoss1:
-    def __init__(self, largura_tela, altura_tela):
-        self.largura_tela = largura_tela
-        self.altura_tela = altura_tela
+    def __init__(self, state, assets):
+        self.largura_tela = state['tela_dimen'][0]
+        self.altura_tela = state['tela_dimen'][1]
         
 
     def atualiza_estado(self):
@@ -101,9 +101,9 @@ class RoomBoss1:
 
 
 class RoomBoss2:
-    def __init__(self, largura_tela, altura_tela):
-        self.largura_tela = largura_tela
-        self.altura_tela = altura_tela
+    def __init__(self, state, assets):
+        self.largura_tela = state['tela_dimen'][0]
+        self.altura_tela = state['tela_dimen'][1]
         
 
     def atualiza_estado(self):
@@ -121,10 +121,9 @@ class RoomBoss2:
 
 
 class RoomBoss3:
-    def __init__(self, largura_tela, altura_tela):
-        self.largura_tela = largura_tela
-        self.altura_tela = altura_tela
-        
+    def __init__(self, state, assets):
+        self.largura_tela = state['tela_dimen'][0]
+        self.altura_tela = state['tela_dimen'][1]
 
     def atualiza_estado(self):
         for event in pygame.event.get(): # Retorna uma lista com todos os eventos que ocorreram desde a última vez que essa função foi chamada
@@ -141,9 +140,9 @@ class RoomBoss3:
 
 
 class RoomFinal:
-    def __init__(self, largura_tela, altura_tela):
-        self.largura_tela = largura_tela
-        self.altura_tela = altura_tela
+    def __init__(self, state, assets):
+        self.largura_tela = state['tela_dimen'][0]
+        self.altura_tela = state['tela_dimen'][1]
         
 
     def atualiza_estado(self):
@@ -161,9 +160,9 @@ class RoomFinal:
 
 
 class TelaFinal:
-    def __init__(self, largura_tela, altura_tela):
-        self.largura_tela = largura_tela
-        self.altura_tela = altura_tela
+    def __init__(self, state, assets):
+        self.largura_tela = state['tela_dimen'][0]
+        self.altura_tela = state['tela_dimen'][1]
         self.fonte_padrao = pygame.font.get_default_font()
         self.font_texto = pygame.font.Font(self.fonte_padrao, 20)
 
@@ -179,16 +178,16 @@ class TelaFinal:
     def desenha(self, window):
         window.fill((0, 0, 0)) # Prrenche a janela do jogo com a cor preta
 
-        texto_final = self.font_texto.render(f'PARABÉNS! VOCÊ CONSEGIUI A DROGA LENDÄRIA', True, (0, 255 0)) # Cria uma imagem do texto
+        texto_final = self.font_texto.render(f'PARABÉNS! VOCÊ CONSEGIUI A DROGA LENDÄRIA', True, (0, 255, 0)) # Cria uma imagem do texto
         window.blit(texto_final, (self.largura_tela // 2 - 125, self.altura_tela // 2)) # Desenha a imagem já carregada por pygame.image.load em window na posição (x, y).
 
         pygame.display.update() # Atualiza a janela do jogo
 
 
 class TelaGameOver:
-    def __init__(self, largura_tela, altura_tela):
-        self.largura_tela = largura_tela
-        self.altura_tela = altura_tela
+    def __init__(self, state, assets):
+        self.largura_tela = state['tela_dimen'][0]
+        self.altura_tela = state['tela_dimen'][1]
         self.fonte_padrao = pygame.font.get_default_font()
         self.font_texto = pygame.font.Font(self.fonte_padrao, 20)
     
