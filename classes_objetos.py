@@ -7,9 +7,10 @@ class Tiro:
         
 
     def atualiza_estado(self):
-
+        pass
     
     def desenha(self, window):
+        pass
 
 class Paredes:
     def __init__(self, state, assets):
@@ -27,10 +28,10 @@ class Paredes:
         
 
     def atualiza_estado(self):
-
+        pass
     
     def desenha_paredes_contorno(self, window):
-
+        pass
 
 class Hazzard:
     def __init__(self, state, assets):
@@ -39,6 +40,7 @@ class Hazzard:
         
 
     def atualiza_estado(self):
-
+        pass
     
     def desenha(self, window):
+        pass
