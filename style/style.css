@@ -118,4 +118,6 @@ video{
 
 footer{
     background-color: black;
+    grid-column-start: 2;
+    grid-column-end: 3;
 }
