@@ -28,7 +28,12 @@ h2{
 }
 
 h3{
-    font-size: 168%;
+    font-size: 170%;
+    color: white;
+}
+
+p{
+    font-size: 150%;
     color: white;
 }
 
@@ -65,6 +70,52 @@ video{
 }
 
 .pessoa{
-    width: 250px;
+    width: 275px;
     height: 350px;
+}
+
+.prints{
+    display: flex;
+    flex-direction: space-around;
+}
+
+.print{
+    padding: 0rem 0.5rem;
+    margin: 0rem 0.5rem;
+    width: 300px;
+    height: 225px;
+}
+
+.descrição{
+    padding: 0.2rem 0rem 0rem;
+    margin: 0.2rem 0rem 0rem;
+}
+
+.python{
+    padding: 0.3rem 0rem;
+    margin: 0.3rem 0rem;
+    color: blue;
+}
+
+.execucão_final{
+    padding: 0.2rem 0rem;
+    margin: 0.2rem 0rem;
+}
+
+.download{
+    color: red;
+}
+
+.resumo{
+    padding: 0.5rem 0rem 0rem;
+    margin: 0.5rem 0rem 0rem;
+}
+
+.soluções{
+    padding: 0.5rem 0rem 0rem;
+    margin: 0.5rem 0rem 0rem;
+}
+
+footer{
+    background-color: black;
 }
