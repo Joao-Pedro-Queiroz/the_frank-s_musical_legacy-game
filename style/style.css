@@ -1,0 +1,21 @@
+header{
+    background-color: #253453;
+    display: grid;
+    grid-template-columns: 15% auto 15%;
+}
+
+.cabeçalho{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    padding: 1rem 0rem;
+    margin: 1rem 0rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    color: white;
+    font-size: 300%;
+}
