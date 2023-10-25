@@ -125,8 +125,6 @@ class Jogador(pygame.sprite.Sprite):
         self.frame = self.animation//150
         self.frame = (self.frame % self.max_frames) + 1
 
-        print(self.facing)
-
         self.personagem = pygame.image.load(f"Sprites/Player/{self.state}/{self.facing}/{self.frame}.png")
         self.image = pygame.transform.scale_by(self.personagem, 10)
 
