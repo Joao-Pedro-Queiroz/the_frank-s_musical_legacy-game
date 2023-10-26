@@ -2,6 +2,16 @@ import pygame
 import math
 
 def movimenta_player(x, y, vel_x, vel_y, clock):
+        '''
+        Função que realiza a movimentação do johador
+
+        parâmetro x: representa a poxição x do jogador
+        parâmetro y: representa a poxição y do jogado
+        parâmetro vel_x: representa a velocidade x do jogador
+        parâmetro vel_y: representa a velocidade y do jogador
+        parâmetro clock: representa o tempo dos frames
+        '''
+
         pos_antiga = [x,y]
         vel = [vel_x, vel_y]
         pos_nova = [0,0]
@@ -10,6 +20,11 @@ def movimenta_player(x, y, vel_x, vel_y, clock):
         return pos_nova
 
 def player_facing(angle):
+    '''
+        Função que define a direção do rosto do jogador
+
+        parâmetro angle: representa o ângulo de visão do jogador
+        '''
 
     angle = int(angle)
 
@@ -34,6 +49,14 @@ def player_facing(angle):
 class Jogador(pygame.sprite.Sprite):
 
     def __init__(self, assets, clock):
+        '''
+        Função que define a classe Jogo
+
+        parâmetro self: representa a própria classe
+        parâmetro dimen: representa as dimensões da tela
+        parâmetro clock: representa o tempo dos frames
+        paràmetro assets: dicionário com alguns valores importantes para o jogo
+        '''
 
         pygame.sprite.Sprite.__init__(self)
 
@@ -60,6 +83,11 @@ class Jogador(pygame.sprite.Sprite):
         self.animation = 0
         
     def update(self):
+        '''
+        Função que atualiza o jogador
+
+        parâmetro self: representa a própria classe
+        '''
 
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -143,16 +171,45 @@ class Jogador(pygame.sprite.Sprite):
 
 
 class Boss1:
-    def __init__(self, state, assets):
-        self.largura_tela = state['tela_dimen'][0]
-        self.altura_tela = state['tela_dimen'][1]
-        
+    def __init__(self, dimen, clock, assets):
+        '''
+        Função que define a classe Jogo
+
+        parâmetro self: representa a própria classe
+        parâmetro dimen: representa as dimensões da tela
+        parâmetro clock: representa o tempo dos frames
+        paràmetro assets: dicionário com alguns valores importantes para o jogo
+        '''
+
+        self.largura_tela = dimen[0]
+        self.altura_tela = dimen[1]
+
+
 class Boss2:
-    def __init__(self, state, assets):
-        self.largura_tela = state['tela_dimen'][0]
-        self.altura_tela = state['tela_dimen'][1]
+    def __init__(self, dimen, clock, assets):
+        '''
+        Função que define a classe Jogo
+
+        parâmetro self: representa a própria classe
+        parâmetro dimen: representa as dimensões da tela
+        parâmetro clock: representa o tempo dos frames
+        paràmetro assets: dicionário com alguns valores importantes para o jogo
+        '''
+
+        self.largura_tela = dimen[0]
+        self.altura_tela = dimen[1]
+
 
 class Boss3:
-    def __init__(self, state, assets):
-        self.largura_tela = state['tela_dimen'][0]
-        self.altura_tela = state['tela_dimen'][1]
+    def __init__(self, dimen, clock, assets):
+        '''
+        Função que define a classe Jogo
+
+        parâmetro self: representa a própria classe
+        parâmetro dimen: representa as dimensões da tela
+        parâmetro clock: representa o tempo dos frames
+        paràmetro assets: dicionário com alguns valores importantes para o jogo
+        '''
+
+        self.largura_tela = dimen[0]
+        self.altura_tela = dimen[1]

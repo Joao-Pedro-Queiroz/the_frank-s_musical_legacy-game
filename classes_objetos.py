@@ -1,9 +1,18 @@
 import pygame
 
 class Tiro(pygame.sprite.Sprite):
-    def __init__(self, state, assets):
-        self.largura_tela = state['tela_dimen'][0]
-        self.altura_tela = state['tela_dimen'][1]
+    def __init__(self, dimen, clock, assets):
+        '''
+        Função que define a classe Jogo
+
+        parâmetro self: representa a própria classe
+        parâmetro dimen: representa as dimensões da tela
+        parâmetro clock: representa o tempo dos frames
+        paràmetro assets: dicionário com alguns valores importantes para o jogo
+        '''
+
+        self.largura_tela = dimen[0]
+        self.altura_tela = dimen[1]
         
 
     def atualiza_estado(self):
@@ -13,9 +22,18 @@ class Tiro(pygame.sprite.Sprite):
         pass
 
 class Paredes(pygame.sprite.Sprite):
-    def __init__(self, state, assets):
-        self.largura_tela = state['tela_dimen'][0]
-        self.altura_tela = state['tela_dimen'][1]
+    def __init__(self, dimen, clock, assets):
+        '''
+        Função que define a classe Jogo
+
+        parâmetro self: representa a própria classe
+        parâmetro dimen: representa as dimensões da tela
+        parâmetro clock: representa o tempo dos frames
+        paràmetro assets: dicionário com alguns valores importantes para o jogo
+        '''
+
+        self.largura_tela = dimen[0]
+        self.altura_tela = dimen[1]
         self.pos_paredes_contorno = []
 
         for pos_x in range(self.largura_tela):
@@ -34,9 +52,18 @@ class Paredes(pygame.sprite.Sprite):
         pass
 
 class Hazzard(pygame.sprite.Sprite):
-    def __init__(self, state, assets):
-        self.largura_tela = state['tela_dimen'][0]
-        self.altura_tela = state['tela_dimen'][1]
+    def __init__(self, dimen, clock, assets):
+        '''
+        Função que define a classe Jogo
+
+        parâmetro self: representa a própria classe
+        parâmetro dimen: representa as dimensões da tela
+        parâmetro clock: representa o tempo dos frames
+        paràmetro assets: dicionário com alguns valores importantes para o jogo
+        '''
+
+        self.largura_tela = dimen[0]
+        self.altura_tela = dimen[1]
         
 
     def atualiza_estado(self):

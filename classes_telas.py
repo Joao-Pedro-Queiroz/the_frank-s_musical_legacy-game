@@ -4,6 +4,14 @@ from classes_objetos import *
 
 class RoomBegin:
     def __init__(self, dimen, clock, assets):
+        '''
+        Função que define a classe Jogo
+
+        parâmetro self: representa a própria classe
+        parâmetro dimen: representa as dimensões da tela
+        parâmetro clock: representa o tempo dos frames
+        paràmetro assets: dicionário com alguns valores importantes para o jogo
+        '''
         self.largura_tela = dimen[0]
         self.altura_tela = dimen[1]
 
@@ -16,6 +24,11 @@ class RoomBegin:
 
 
     def atualiza_estado(self):
+        '''
+        Função que atualiza a tela do jogo
+
+        parâmetro self: representa a própria classe
+        '''
 
         for event in pygame.event.get(pygame.QUIT): # Retorna uma lista com todos os eventos que ocorreram desde a última vez que essa função foi chamada
             if event.type == pygame.QUIT: 
@@ -26,6 +39,13 @@ class RoomBegin:
 
     
     def desenha(self, window):
+        '''
+        Função que desenha a tela do jgo
+
+        parâmetro self: representa a própria classe
+        parâmetro window: representa a janlea do jogo
+        '''
+
         window.fill((0, 0, 0)) # Prrenche a janela do jogo com a cor preta
         self.sprites.draw(window)
 
