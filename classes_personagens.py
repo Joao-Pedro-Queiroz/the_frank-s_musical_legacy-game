@@ -86,10 +86,10 @@ class Jogador(pygame.sprite.Sprite):
         self.vel_y = 0
         self.vel_x = 0
         
-        if 'forward' in self.mov_player: self.vel_y = -80
-        if 'back' in self.mov_player: self.vel_y = 80
-        if 'right' in self.mov_player: self.vel_x = 80
-        if 'left' in self.mov_player: self.vel_x = -80
+        if 'forward' in self.mov_player: self.vel_y = -250
+        if 'back' in self.mov_player: self.vel_y = 250
+        if 'right' in self.mov_player: self.vel_x = 250
+        if 'left' in self.mov_player: self.vel_x = -250
 
         if 'forward' in self.mov_player and 'back' in self.mov_player:
             self.vel_y = 0
@@ -126,7 +126,7 @@ class Jogador(pygame.sprite.Sprite):
         self.frame = (self.frame % self.max_frames) + 1
 
         self.personagem = pygame.image.load(f"Sprites/Player/{self.state}/{self.facing}/{self.frame}.png")
-        self.image  = pygame.transform.scale_by(self.personagem, 10)
+        self.image  = pygame.transform.scale_by(self.personagem, 6)
 
         
         
