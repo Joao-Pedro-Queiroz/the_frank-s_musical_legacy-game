@@ -3,6 +3,11 @@ from classes_telas import *
 
 class Jogo:
     def __init__(self):
+        '''
+        Função que define a classe Jogo
+
+        parâmetro self: representa a própria classe
+        '''
 
         pygame.init()
 

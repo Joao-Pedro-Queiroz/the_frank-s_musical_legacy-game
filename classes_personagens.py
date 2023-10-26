@@ -34,6 +34,14 @@ def player_facing(angle):
 class Jogador(pygame.sprite.Sprite):
 
     def __init__(self, assets, clock):
+        '''
+        Função que define a classe Jogo
+
+        parâmetro self: representa a própria classe
+        parâmetro dimen: representa as dimensões da tela
+        parâmetro clock: representa o tempo dos frames
+        paràmetro assets: dicionário com alguns valores importantes para o jogo
+        '''
 
         pygame.sprite.Sprite.__init__(self)
 
@@ -143,16 +151,45 @@ class Jogador(pygame.sprite.Sprite):
 
 
 class Boss1:
-    def __init__(self, state, assets):
-        self.largura_tela = state['tela_dimen'][0]
-        self.altura_tela = state['tela_dimen'][1]
-        
+    def __init__(self, dimen, clock, assets):
+        '''
+        Função que define a classe Jogo
+
+        parâmetro self: representa a própria classe
+        parâmetro dimen: representa as dimensões da tela
+        parâmetro clock: representa o tempo dos frames
+        paràmetro assets: dicionário com alguns valores importantes para o jogo
+        '''
+
+        self.largura_tela = dimen[0]
+        self.altura_tela = dimen[1]
+
+
 class Boss2:
-    def __init__(self, state, assets):
-        self.largura_tela = state['tela_dimen'][0]
-        self.altura_tela = state['tela_dimen'][1]
+    def __init__(self, dimen, clock, assets):
+        '''
+        Função que define a classe Jogo
+
+        parâmetro self: representa a própria classe
+        parâmetro dimen: representa as dimensões da tela
+        parâmetro clock: representa o tempo dos frames
+        paràmetro assets: dicionário com alguns valores importantes para o jogo
+        '''
+
+        self.largura_tela = dimen[0]
+        self.altura_tela = dimen[1]
+        
 
 class Boss3:
-    def __init__(self, state, assets):
-        self.largura_tela = state['tela_dimen'][0]
-        self.altura_tela = state['tela_dimen'][1]
+    def __init__(self, dimen, clock, assets):
+        '''
+        Função que define a classe Jogo
+
+        parâmetro self: representa a própria classe
+        parâmetro dimen: representa as dimensões da tela
+        parâmetro clock: representa o tempo dos frames
+        paràmetro assets: dicionário com alguns valores importantes para o jogo
+        '''
+
+        self.largura_tela = dimen[0]
+        self.altura_tela = dimen[1]
