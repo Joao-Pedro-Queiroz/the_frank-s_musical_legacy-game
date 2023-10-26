@@ -23,8 +23,8 @@ h1{
 h2{
     color: white;
     font-size: 225%;
-    padding: 0.9rem 0rem 0.4rem;
-    margin: 0.9rem 0rem 0.4rem;
+    padding: 1.2rem 0rem 0.4rem;
+    margin: 1.2rem 0rem 0.4rem;
 }
 
 h3{
@@ -150,6 +150,6 @@ footer{
 }
 
 .solução{
-    padding: 0rem 0rem 1rem;
-    margin: 0rem 0rem 1rem;
+    padding: 0rem 0rem 1.2rem;
+    margin: 0rem 0rem 1.2rem;
 }
