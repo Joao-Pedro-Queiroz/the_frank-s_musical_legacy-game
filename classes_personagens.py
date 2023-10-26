@@ -2,6 +2,16 @@ import pygame
 import math
 
 def movimenta_player(x, y, vel_x, vel_y, clock):
+        '''
+        Função que realiza a movimentação do johador
+
+        parâmetro x: representa a poxição x do jogador
+        parâmetro y: representa a poxição y do jogado
+        parâmetro vel_x: representa a velocidade x do jogador
+        parâmetro vel_y: representa a velocidade y do jogador
+        parâmetro clock: representa o tempo dos frames
+        '''
+
         pos_antiga = [x,y]
         vel = [vel_x, vel_y]
         pos_nova = [0,0]
@@ -10,6 +20,11 @@ def movimenta_player(x, y, vel_x, vel_y, clock):
         return pos_nova
 
 def player_facing(angle):
+    '''
+        Função que define a direção do rosto do jogador
+
+        parâmetro angle: representa o ângulo de visão do jogador
+        '''
 
     angle = int(angle)
 
@@ -68,6 +83,11 @@ class Jogador(pygame.sprite.Sprite):
         self.animation = 0
         
     def update(self):
+        '''
+        Função que atualiza o jogador
+
+        parâmetro self: representa a própria classe
+        '''
 
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -178,7 +198,7 @@ class Boss2:
 
         self.largura_tela = dimen[0]
         self.altura_tela = dimen[1]
-        
+
 
 class Boss3:
     def __init__(self, dimen, clock, assets):

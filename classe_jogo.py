@@ -27,6 +27,12 @@ class Jogo:
         self.telas = [RoomBegin(self.window_dimen, self.clock, self.assets)]
 
     def game_loop(self):
+        '''
+        Função com o objetivo de rodar o jogo
+
+        parâmetro self: representa a própria classe
+        '''
+
         game = True
 
         tela_atual = self.telas[self.current_screen_index]
