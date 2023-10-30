@@ -4,7 +4,7 @@ import math
 class Tiro(pygame.sprite.Sprite):
     def __init__(self, player, assets, dimen, clock):
         '''
-        Função que define a classe Jogo
+        Função que define a classe Tiro
 
         parâmetro self: representa a própria classe
         parâmetro dimen: representa as dimensões da tela
@@ -50,31 +50,24 @@ class Tiro(pygame.sprite.Sprite):
         self.rect.y = self.rect.y + self.vel_y * self.clock.get_time()/1000
     
 
-class Paredes(pygame.sprite.Sprite):
-    def __init__(self, dimen, clock, assets):
+class Parede(pygame.sprite.Sprite):
+    def __init__(self, pos_x, pos_y, largura, altura):
         '''
-        Função que define a classe Jogo
+        Função que define a classe Parede
 
         parâmetro self: representa a própria classe
-        parâmetro dimen: representa as dimensões da tela
-        parâmetro clock: representa o tempo dos frames
-        paràmetro assets: dicionário com alguns valores importantes para o jogo
-        '''
+        parâmetro pos_x: representa a posição x do nato superior esquerdo da parede
+        parâmetro pos_y: representa a posição y do nato superior esquerdo da parede
+        parâmetro largura: representa a largura da parede
+        parâmetro altura: representa a altura da parede
+        ''' 
+    
+        pygame.sprite.Sprite.__init__(self)
 
-        self.largura_tela = dimen[0]
-        self.altura_tela = dimen[1]
-        self.pos_paredes_contorno = []
-
-        for pos_x in range(self.largura_tela):
-            self.pos_paredes_contorno.append([pos_x, 0])
-            self.pos_paredes_contorno.append([pos_x, self.altura_tela])
-
-        for pos_y in range(self.altura_tela):
-            self.pos_paredes_contorno.append([0, pos_y])
-            self.pos_paredes_contorno.append([self.largura_tela, pos_y])
+        self.rect = pygame.Rect(pos_x, pos_y, largura, altura)
         
 
-    def atualiza_estado(self):
+    def update(self):
         pass
     
     def desenha_paredes_contorno(self, window):
@@ -83,7 +76,7 @@ class Paredes(pygame.sprite.Sprite):
 class Hazzard(pygame.sprite.Sprite):
     def __init__(self, dimen, clock, assets):
         '''
-        Função que define a classe Jogo
+        Função que define a classe Hazzard
 
         parâmetro self: representa a própria classe
         parâmetro dimen: representa as dimensões da tela

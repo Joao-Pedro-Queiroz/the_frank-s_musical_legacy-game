@@ -5,7 +5,7 @@ from classes_objetos import *
 class RoomBegin:
     def __init__(self, dimen, clock, assets):
         '''
-        Função que define a classe Jogo
+        Função que define a classe RoomBegin
 
         parâmetro self: representa a própria classe
         parâmetro dimen: representa as dimensões da tela
@@ -30,7 +30,7 @@ class RoomBegin:
 
     def atualiza_estado(self):
         '''
-        Função que atualiza a tela do jogo
+        Função que atualiza a tela do RoomBegin
 
         parâmetro self: representa a própria classe
         '''
@@ -64,8 +64,12 @@ class RoomBegin:
         parâmetro window: representa a janlea do jogo
         '''
 
+<<<<<<< HEAD
         window.fill((0, 0, 0)) # Prrenche a janela do jogo com a cor preta
 
+=======
+        window.fill((0, 0, 0)) # Preenche a janela do jogo com a cor preta
+>>>>>>> 6ddc904e3fd9f9470d25b612c6151ebc329df661
         self.sprites.draw(window)
         self.tiros.draw(window)
 
@@ -87,7 +91,7 @@ class RoomBegin:
 
     
 #     def desenha(self, window):
-#         window.fill((0, 0, 0)) # Prrenche a janela do jogo com a cor preta
+#         window.fill((0, 0, 0)) # Preenche a janela do jogo com a cor preta
 
 #         pygame.display.update() # Atualiza a janela do jogo
 
@@ -107,7 +111,7 @@ class RoomBegin:
 
     
 #     def desenha(self, window):
-#         window.fill((0, 0, 0)) # Prrenche a janela do jogo com a cor preta
+#         window.fill((0, 0, 0)) # Preenche a janela do jogo com a cor preta
 
 #         pygame.display.update() # Atualiza a janela do jogo
 
@@ -126,7 +130,7 @@ class RoomBegin:
 
     
 #     def desenha(self, window):
-#         window.fill((0, 0, 0)) # Prrenche a janela do jogo com a cor preta
+#         window.fill((0, 0, 0)) # Preenche a janela do jogo com a cor preta
 
 #         pygame.display.update() # Atualiza a janela do jogo
 
@@ -146,7 +150,7 @@ class RoomBegin:
 
     
 #     def desenha(self, window):
-#         window.fill((0, 0, 0)) # Prrenche a janela do jogo com a cor preta
+#         window.fill((0, 0, 0)) # Preenche a janela do jogo com a cor preta
 
 #         pygame.display.update() # Atualiza a janela do jogo
 
@@ -168,7 +172,7 @@ class RoomBegin:
             
     
 #     def desenha(self, window):
-#         window.fill((0, 0, 0)) # Prrenche a janela do jogo com a cor preta
+#         window.fill((0, 0, 0)) # Preenche a janela do jogo com a cor preta
 
 #         texto_final = self.font_texto.render(f'PARABÉNS! VOCÊ CONSEGIUI A DROGA LENDÄRIA', True, (0, 255, 0)) # Cria uma imagem do texto
 #         window.blit(texto_final, (self.largura_tela // 2 - 125, self.altura_tela // 2)) # Desenha a imagem já carregada por pygame.image.load em window na posição (x, y).
@@ -193,8 +197,8 @@ class RoomBegin:
         
     
 #     def desenha(self, window):
-#         window.fill((0, 0, 0))
-        
+#         window.fill((0, 0, 0)) # Preenche a janela do jogo com a cor preta
+
 #         texto_morte = self.font_texto.render(f'VOCË MORREU', True, (255, 0, 0)) # Cria uma imagem do texto
 #         window.blit(texto_morte, (self.largura_tela // 2 - 85, self.altura_tela // 2)) # Desenha a imagem já carregada por pygame.image.load em window na posição (x, y).
 
