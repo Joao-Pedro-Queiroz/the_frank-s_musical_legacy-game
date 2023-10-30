@@ -3,7 +3,7 @@ import pygame
 class Tiro(pygame.sprite.Sprite):
     def __init__(self, dimen, clock, assets):
         '''
-        Função que define a classe Jogo
+        Função que define a classe Tiro
 
         parâmetro self: representa a própria classe
         parâmetro dimen: representa as dimensões da tela
@@ -24,7 +24,7 @@ class Tiro(pygame.sprite.Sprite):
 class Parede(pygame.sprite.Sprite):
     def __init__(self):
         '''
-        Função que define a classe Jogo
+        Função que define a classe Parede
 
         parâmetro self: representa a própria classe
         ''' 
@@ -40,7 +40,7 @@ class Parede(pygame.sprite.Sprite):
 class Hazzard(pygame.sprite.Sprite):
     def __init__(self, dimen, clock, assets):
         '''
-        Função que define a classe Jogo
+        Função que define a classe Hazzard
 
         parâmetro self: representa a própria classe
         parâmetro dimen: representa as dimensões da tela

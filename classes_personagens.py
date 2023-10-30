@@ -3,7 +3,7 @@ import math
 
 def movimenta_player(x, y, vel_x, vel_y, clock):
         '''
-        Função que realiza a movimentação do johador
+        Função que realiza a movimentação do jogador
 
         parâmetro x: representa a poxição x do jogador
         parâmetro y: representa a poxição y do jogado
@@ -50,7 +50,7 @@ class Jogador(pygame.sprite.Sprite):
 
     def __init__(self, assets, clock):
         '''
-        Função que define a classe Jogo
+        Função que define a classe Jogador
 
         parâmetro self: representa a própria classe
         parâmetro dimen: representa as dimensões da tela
@@ -173,7 +173,7 @@ class Jogador(pygame.sprite.Sprite):
 class Boss1:
     def __init__(self, dimen, clock, assets):
         '''
-        Função que define a classe Jogo
+        Função que define a classe Boss1
 
         parâmetro self: representa a própria classe
         parâmetro dimen: representa as dimensões da tela
@@ -188,7 +188,7 @@ class Boss1:
 class Boss2:
     def __init__(self, dimen, clock, assets):
         '''
-        Função que define a classe Jogo
+        Função que define a classe Boss2
 
         parâmetro self: representa a própria classe
         parâmetro dimen: representa as dimensões da tela
@@ -203,7 +203,7 @@ class Boss2:
 class Boss3:
     def __init__(self, dimen, clock, assets):
         '''
-        Função que define a classe Jogo
+        Função que define a classe Boss3
 
         parâmetro self: representa a própria classe
         parâmetro dimen: representa as dimensões da tela
