@@ -60,16 +60,16 @@ class Jogador(pygame.sprite.Sprite):
 
         pygame.sprite.Sprite.__init__(self)
 
-        self.pos = (0,0)
-
         self.clock = clock
         self.assets = assets
 
-        self.personagem = pygame.image.load(r"Sprites\Player\Standing\Back\1.png")
+        self.sprite = pygame.image.load(r"Sprites\Player\Standing\Back\1.png")
 
-        self.image = pygame.transform.scale_by(self.personagem, 10)
+        self.image = pygame.transform.scale_by(self.sprite, 6)
 
-        self.rect = self.image.get_rect(center = self.pos)
+        self.rect = self.image.get_rect()
+
+        self.rect.x, self.rect.y = [100,100]
 
         self.vel_x = 0
         self.vel_y = 0
@@ -81,6 +81,8 @@ class Jogador(pygame.sprite.Sprite):
         self.frame = 0
         self.max_frames = 4
         self.animation = 0
+
+        print(self.rect.width)
         
     def update(self):
         '''

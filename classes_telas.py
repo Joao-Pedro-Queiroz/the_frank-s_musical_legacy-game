@@ -15,12 +15,17 @@ class RoomBegin:
         self.largura_tela = dimen[0]
         self.altura_tela = dimen[1]
 
+        self.dimen = dimen
+
         self.clock = clock
         self.assets = assets
         self.sprites = pygame.sprite.Group()
+        self.tiros = pygame.sprite.Group()
 
         self.personagem = Jogador(assets, clock)
         self.sprites.add(self.personagem)
+        self.fire_rate = 300
+        self.count_fr = 0
 
 
     def atualiza_estado(self):
@@ -35,6 +40,19 @@ class RoomBegin:
                 return -1
             
         self.personagem.update()
+
+        if pygame.mouse.get_pressed()[0]:
+            if self.count_fr == 0:
+                print(self.personagem.rect.w)
+                self.tiros.add(Tiro(self.personagem, self.assets, self.dimen, self.clock))
+            self.count_fr += self.clock.get_time()
+            if self.count_fr >= self.fire_rate:
+                self.count_fr = 0
+        else:
+            self.count_fr = 0
+
+        self.tiros.update()
+
         return 0
 
     
@@ -47,7 +65,9 @@ class RoomBegin:
         '''
 
         window.fill((0, 0, 0)) # Prrenche a janela do jogo com a cor preta
+
         self.sprites.draw(window)
+        self.tiros.draw(window)
 
         pygame.display.update() # Atualiza a janela do jogo
 
