@@ -77,7 +77,8 @@ video{
 
 .prints{
     display: flex;
-    flex-direction: space-around;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 .print{
