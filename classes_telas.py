@@ -5,7 +5,7 @@ from classes_objetos import *
 class RoomBegin:
     def __init__(self, dimen, clock, assets):
         '''
-        Função que define a classe Jogo
+        Função que define a classe RoomBegin
 
         parâmetro self: representa a própria classe
         parâmetro dimen: representa as dimensões da tela
@@ -25,7 +25,7 @@ class RoomBegin:
 
     def atualiza_estado(self):
         '''
-        Função que atualiza a tela do jogo
+        Função que atualiza a tela do RoomBegin
 
         parâmetro self: representa a própria classe
         '''
