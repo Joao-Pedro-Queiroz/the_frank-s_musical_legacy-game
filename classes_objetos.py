@@ -22,14 +22,16 @@ class Tiro(pygame.sprite.Sprite):
         pass
 
 class Parede(pygame.sprite.Sprite):
-    def __init__(sel):
+    def __init__(self):
         '''
         Função que define a classe Jogo
 
         parâmetro self: representa a própria classe
         ''' 
 
-    def atualiza_estado(self):
+        pygame.sprite.Sprite.__init__(self)
+
+    def update(self):
         pass
     
     def desenha_paredes_contorno(self, window):
