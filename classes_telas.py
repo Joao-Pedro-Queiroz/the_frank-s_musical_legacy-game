@@ -64,12 +64,8 @@ class RoomBegin:
         parâmetro window: representa a janlea do jogo
         '''
 
-<<<<<<< HEAD
         window.fill((0, 0, 0)) # Prrenche a janela do jogo com a cor preta
 
-=======
-        window.fill((0, 0, 0)) # Preenche a janela do jogo com a cor preta
->>>>>>> 6ddc904e3fd9f9470d25b612c6151ebc329df661
         self.sprites.draw(window)
         self.tiros.draw(window)
 
