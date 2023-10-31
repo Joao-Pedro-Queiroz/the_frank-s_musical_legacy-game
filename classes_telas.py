@@ -74,8 +74,13 @@ class RoomBegin:
 
 # class RoomBoss1:
 #     def __init__(self, dimen, clock, assets):
-#         self.largura_tela = state['tela_dimen'][0]
-#         self.altura_tela = state['tela_dimen'][1]
+#         self.largura_tela = dimen[0]
+#         self.altura_tela = dimen[1]
+#         self.paredes =  pygame.sprite.Group()
+#         self.paredes.add(Parede(self.largura_tela // 10, self.altura_tela // 4, self.largura_tela - self.largura_tela // 5, 5))
+#         self.paredes.add(Parede(self.largura_tela // 10, self.altura_tela - 1, self.largura_tela - self.largura_tela // 5, 1))
+#         self.paredes.add(Parede(self.largura_tela // 10, self.altura_tela // 4, 5, self.altura_tela - self.altura_tela // 4))
+#         self.paredes.add(Parede(self.largura_tela - self.largura_tela // 10 - 5, self.altura_tela // 4, 5, self.altura_tela - self.altura_tela // 4))
         
 
 #     def atualiza_estado(self):
@@ -94,9 +99,14 @@ class RoomBegin:
 
 # class RoomBoss2:
 #     def __init__(self, dimen, clock, assets):
-#         self.largura_tela = state['tela_dimen'][0]
-#         self.altura_tela = state['tela_dimen'][1]
-        
+#         self.largura_tela = dimen[0]
+#         self.altura_tela = dimen[1]
+#         self.paredes =  pygame.sprite.Group()
+#         self.paredes.add(Parede(0, 0, self.largura_tela, 1))
+#         self.paredes.add(Parede(0, self.altura_tela - 15, self.largura_tela, 15))
+#         self.paredes.add(Parede(0, 0, 10, self.altura_tela))
+#         self.paredes.add(Parede(self.largura_tela - 10, 0, 10, self.altura_tela))
+       
 
 #     def atualiza_estado(self):
 #         for event in pygame.event.get(): # Retorna uma lista com todos os eventos que ocorreram desde a última vez que essa função foi chamada
@@ -114,8 +124,14 @@ class RoomBegin:
 
 # class RoomBoss3:
 #     def __init__(self, dimen, clock, assets):
-#         self.largura_tela = state['tela_dimen'][0]
-#         self.altura_tela = state['tela_dimen'][1]
+#         self.largura_tela = dimen[0]
+#         self.altura_tela = dimen[1]
+#         self.paredes =  pygame.sprite.Group()
+#         self.paredes.add(Parede(0, self.altura_tela // 4, self.largura_tela, 2))
+#         self.paredes.add(Parede(0, self.altura_tela - 1, self.largura_tela, 1))
+#         self.paredes.add(Parede(0, self.altura_tela // 4, 1, self.altura_tela - self.altura_tela // 4))
+#         self.paredes.add(Parede(self.largura_tela - 1, self.altura_tela // 4, 1, self.altura_tela - self.altura_tela // 4))
+       
 
 #     def atualiza_estado(self):
 #         for event in pygame.event.get(): # Retorna uma lista com todos os eventos que ocorreram desde a última vez que essa função foi chamada
@@ -133,8 +149,8 @@ class RoomBegin:
 
 # class RoomFinal:
 #     def __init__(self, dimen, clock, assets):
-#         self.largura_tela = state['tela_dimen'][0]
-#         self.altura_tela = state['tela_dimen'][1]
+#         self.largura_tela = dimen[0]
+#         self.altura_tela = dimen[1]
         
 
 #     def atualiza_estado(self):
@@ -153,9 +169,9 @@ class RoomBegin:
 
 # class TelaFinal:
 #     def __init__(self, dimen, clock, assets):
-#         self.largura_tela = state['tela_dimen'][0]
-#         self.altura_tela = state['tela_dimen'][1]
-#         self.fonte_padrao = pygame.font.get_default_font()
+#         self.largura_tela = dimen[0]
+#         self.altura_tela = dimen[1]
+#         self.fonte_padrao = assests['fonte_padrao']
 #         self.font_texto = pygame.font.Font(self.fonte_padrao, 20)
 
     
@@ -178,9 +194,9 @@ class RoomBegin:
 
 # class TelaGameOver:
 #     def __init__(self, dimen, clock, assets):
-#         self.largura_tela = state['tela_dimen'][0]
-#         self.altura_tela = state['tela_dimen'][1]
-#         self.fonte_padrao = pygame.font.get_default_font()
+#         self.largura_tela = dimen[0]
+#         self.altura_tela = dimen[1]
+#         self.fonte_padrao = assests['fonte_padrao']
 #         self.font_texto = pygame.font.Font(self.fonte_padrao, 20)
     
 

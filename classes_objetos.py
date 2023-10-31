@@ -65,7 +65,7 @@ class Parede(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         self.rect = pygame.Rect(pos_x, pos_y, largura, altura)
-        
+
 
     def update(self):
         pass
