@@ -85,7 +85,7 @@ class RoomBegin:
 #     def __init__(self, dimen, clock, assets):
 #         self.largura_tela = dimen[0]
 #         self.altura_tela = dimen[1]
-#         self.fundo = pygame.image.load(f"Sprites/1.png")
+#         self.fundo = pygame.image.load(f"Sprites/Maps/1.png")
 
 #         self.paredes =  pygame.sprite.Group()
 #         self.paredes.add(Parede(self.largura_tela // 10, self.altura_tela // 4, self.largura_tela - self.largura_tela // 5, 5))
@@ -137,7 +137,7 @@ class RoomBegin:
 #     def __init__(self, dimen, clock, assets):
 #         self.largura_tela = dimen[0]
 #         self.altura_tela = dimen[1]
-#         self.fundo = pygame.image.load(f"Sprites/3.png")
+#         self.fundo = pygame.image.load(f"Sprites/Maps/3.png")
 
 #         self.paredes =  pygame.sprite.Group()
 #         self.paredes.add(Parede(0, self.altura_tela // 4, self.largura_tela, 2))
