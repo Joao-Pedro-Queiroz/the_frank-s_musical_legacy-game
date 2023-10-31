@@ -81,8 +81,6 @@ class Jogador(pygame.sprite.Sprite):
         self.frame = 0
         self.max_frames = 4
         self.animation = 0
-
-        print(self.rect.width)
         
     def update(self):
         '''
@@ -161,18 +159,7 @@ class Jogador(pygame.sprite.Sprite):
         
         
 
-
-
-        
-
-
-
-
-        
-            
-
-
-class Boss1:
+class Boss1(pygame.sprite.Sprite):
     def __init__(self, dimen, clock, assets):
         '''
         Função que define a classe Boss1
@@ -183,9 +170,31 @@ class Boss1:
         paràmetro assets: dicionário com alguns valores importantes para o jogo
         '''
 
+        pygame.sprite.Sprite.__init__(self)
+
         self.largura_tela = dimen[0]
         self.altura_tela = dimen[1]
 
+        self.clock = clock
+        self.assets = assets
+
+        self.hp = 1000
+
+        self.sprite = pygame.image.load("Sprites/Maps/1.png")
+        self.image = pygame.transform.scale(self.sprite, (200, 200))
+
+        self.rect = self.image.get_rect()
+        self.rect.x, self.rect.y = (200, 200)
+
+    def update():
+        pass    
+
+    def colide_com_tiros(self, boss, tiros):
+        colisoes = pygame.sprite.spritecollide(boss, tiros, True)
+        for i in colisoes:
+            self.hp -= 5
+
+        
 
 class Boss2:
     def __init__(self, dimen, clock, assets):

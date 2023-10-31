@@ -1,5 +1,6 @@
 import pygame
 import math
+import random
 
 class Tiro(pygame.sprite.Sprite):
     def __init__(self, player, assets, dimen, clock):
@@ -19,7 +20,10 @@ class Tiro(pygame.sprite.Sprite):
         self.assets = assets
         self.vel = 650
 
-        self.tiro = pygame.image.load("Sprites/Projectiles/1/2.png")
+        tipo = random.randint(1,4)
+        cor = random.randint(1,8)
+
+        self.tiro = pygame.image.load(f"Sprites/Projectiles/{tipo}/{cor}.png")
         self.image = pygame.transform.scale_by(self.tiro, 5)
         self.rect = self.image.get_rect()
 

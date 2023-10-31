@@ -21,9 +21,14 @@ class RoomBegin:
         self.assets = assets
         self.sprites = pygame.sprite.Group()
         self.tiros = pygame.sprite.Group()
+        self.boss = pygame.sprite.Group()
 
         self.personagem = Jogador(assets, clock)
         self.sprites.add(self.personagem)
+        
+        self.boss1 = Boss1(self.dimen, self.clock, self.assets)
+        self.boss.add(self.boss1)
+
         self.fire_rate = 300
         self.count_fr = 0
 
@@ -43,7 +48,6 @@ class RoomBegin:
 
         if pygame.mouse.get_pressed()[0]:
             if self.count_fr == 0:
-                print(self.personagem.rect.w)
                 self.tiros.add(Tiro(self.personagem, self.assets, self.dimen, self.clock))
             self.count_fr += self.clock.get_time()
             if self.count_fr >= self.fire_rate:
@@ -53,12 +57,16 @@ class RoomBegin:
 
         self.tiros.update()
 
+        self.boss1.colide_com_tiros(self.boss1, self.tiros)
+
+        print(self.boss1.hp)
+
         return 0
 
     
     def desenha(self, window):
         '''
-        Função que desenha a tela do jgo
+        Função que desenha a tela do jogo
 
         parâmetro self: representa a própria classe
         parâmetro window: representa a janlea do jogo
@@ -66,8 +74,9 @@ class RoomBegin:
 
         window.fill((0, 0, 0)) # Prrenche a janela do jogo com a cor preta
 
-        self.sprites.draw(window)
         self.tiros.draw(window)
+        self.sprites.draw(window)
+        self.boss.draw(window)
 
         pygame.display.update() # Atualiza a janela do jogo
 
