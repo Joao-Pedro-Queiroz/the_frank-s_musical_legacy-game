@@ -23,13 +23,13 @@ h1{
 h2{
     color: white;
     font-size: 225%;
-    padding: 5rem 0rem 0.4rem;
-    margin: 5rem 0rem 0.4rem;
+    padding: 5rem 0rem 0.7rem;
+    margin: 5rem 0rem 0.7rem;
 }
 
 h3{
     font-size: 185%;
-    color: black;
+    color: rgb(255, 205, 6);
     padding: 0rem 0rem 0.2rem;
     margin: 0rem 0rem 0.2rem;
 }
