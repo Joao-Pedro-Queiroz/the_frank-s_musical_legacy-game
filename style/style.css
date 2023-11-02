@@ -23,18 +23,27 @@ h1{
 h2{
     color: white;
     font-size: 225%;
-    padding: 2.5rem 0rem 0.4rem;
-    margin: 2.5rem 0rem 0.4rem;
+    padding: 3rem 0rem 0.7rem;
+    margin: 3rem 0rem 0.7rem;
 }
 
 h3{
-    font-size: 170%;
-    color: white;
+    font-size: 185%;
+    color: rgb(255, 205, 6);
+    padding: 0rem 0rem 0.2rem;
+    margin: 0rem 0rem 0.2rem;
+}
+
+h4{
+    color: #000a1d;
+    padding: 3rem 0rem 0rem;
+    margin: 3rem 0rem 0rem;
 }
 
 p{
     font-size: 150%;
     color: white;
+    text-align: center;
 }
 
 .body{
@@ -73,6 +82,10 @@ video{
     border-radius: 50%;
     width: 275px;
     height: 300px;
+}
+
+.pessoa-text{
+    color: white;
 }
 
 .prints{
@@ -147,6 +160,7 @@ footer{
 }
 
 .footer{
+    color: white;
     padding: 0rem 0rem 0.4rem;
     margin: 0rem 0rem 0.4rem;
 }
@@ -156,6 +170,6 @@ footer{
 }
 
 .solução{
-    padding: 0rem 0rem 2.5rem;
-    margin: 0rem 0rem 2.5rem;
+    padding: 0rem 0rem 3rem;
+    margin: 0rem 0rem 3rem;
 }

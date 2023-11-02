@@ -216,6 +216,14 @@ class Boss1(pygame.sprite.Sprite):
 
 
     def colide_com_tiros(self, boss, tiros):
+        '''
+        Função que verifica a colisão de um boss com um tiro 
+
+        parâmetro self: representa a própria classe
+        parâmetro boss: representa o chefão que será testada a colisão
+        paràmetro tiros: representa a lista de tiros que será testada a colisão
+        '''
+
         colisoes = pygame.sprite.spritecollide(boss, tiros, True)
         for i in colisoes:
             self.hp -= 5

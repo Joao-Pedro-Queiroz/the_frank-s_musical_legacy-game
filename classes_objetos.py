@@ -8,6 +8,7 @@ class Tiro(pygame.sprite.Sprite):
         Função que define a classe Tiro
 
         parâmetro self: representa a própria classe
+        parâmetro player: representa o jogador
         parâmetro dimen: representa as dimensões da tela
         parâmetro clock: representa o tempo dos frames
         paràmetro assets: dicionário com alguns valores importantes para o jogo
@@ -47,8 +48,12 @@ class Tiro(pygame.sprite.Sprite):
 
         print(self.angle)
 
+    def update(self):
+        '''
+        Função que atualiza o tiro
 
-    def update(self): 
+        parâmetro self: representa a própria classe
+        '''
 
         self.vel_x = self.vel * math.cos(math.radians(self.angle))
         self.vel_y = self.vel * math.sin(math.radians(self.angle))
@@ -112,7 +117,7 @@ class Parede(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         self.rect = pygame.Rect(pos_x, pos_y, largura, altura)
-        
+
 
     def update(self):
         pass
