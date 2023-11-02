@@ -37,22 +37,65 @@ class Tiro(pygame.sprite.Sprite):
         self.rect.x = center_pos[0]
         self.rect.y = center_pos[1]
 
+        self.x_bala = float(self.rect.x)
+        self.y_bala = float(self.rect.y)
+
         x_dist = pygame.mouse.get_pos()[0] - center_pos[0]
         y_dist = pygame.mouse.get_pos()[1] - center_pos[1]
 
         self.angle = math.degrees(math.atan2(y_dist, x_dist))
 
+        print(self.angle)
 
-    def update(self):
 
-        
+    def update(self): 
 
         self.vel_x = self.vel * math.cos(math.radians(self.angle))
         self.vel_y = self.vel * math.sin(math.radians(self.angle))
 
-        self.rect.x = self.rect.x + self.vel_x * self.clock.get_time()/1000
-        self.rect.y = self.rect.y + self.vel_y * self.clock.get_time()/1000
-    
+        self.x_bala = self.x_bala + self.vel_x * self.clock.get_time()/1000
+        self.y_bala = self.y_bala + self.vel_y * self.clock.get_time()/1000
+
+        self.rect.x = int(self.x_bala)
+        self.rect.y = int(self.y_bala)
+
+class Tiro_boss(pygame.sprite.Sprite):
+    def __init__(self, pos, assets, dimen, clock, angle):
+
+        pygame.sprite.Sprite.__init__(self)
+
+        self.pos = pos
+        self.assets = assets
+        self.dimen = dimen
+        self.clock = clock
+        self.angle = angle
+
+        self.sprite = pygame.image.load("Sprites/Maps/3.png")
+        self.image = pygame.transform.scale(self.sprite, (30,30))
+        
+        self.rect = self.image.get_rect()
+
+        self.rect.x, self.rect.y = self.pos
+
+        self.vel_x = 0
+        self.vel_y = 0
+
+        self.vel = 250
+
+        self.x_bala = float(self.rect.x)
+        self.y_bala = float(self.rect.y)
+
+    def update(self):
+
+        self.vel_x = self.vel * math.cos(math.radians(self.angle))
+        self.vel_y = self.vel * math.sin(math.radians(self.angle))
+
+        self.x_bala = self.x_bala + self.vel_x * self.clock.get_time()/1000
+        self.y_bala = self.y_bala + self.vel_y * self.clock.get_time()/1000
+
+        self.rect.x = int(self.x_bala)
+        self.rect.y = int(self.y_bala)
+
 
 class Parede(pygame.sprite.Sprite):
     def __init__(self, pos_x, pos_y, largura, altura):

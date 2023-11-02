@@ -81,6 +81,8 @@ class Jogador(pygame.sprite.Sprite):
         self.frame = 0
         self.max_frames = 4
         self.animation = 0
+
+        self.hp = 100
         
     def update(self):
         '''
@@ -156,6 +158,11 @@ class Jogador(pygame.sprite.Sprite):
         self.personagem = pygame.image.load(f"Sprites/Player/{self.state}/{self.facing}/{self.frame}.png")
         self.image  = pygame.transform.scale_by(self.personagem, 6)
 
+    def colide_com_tiros(self, tiros):
+        colisoes = pygame.sprite.spritecollide(self, tiros, True)
+        for i in colisoes:
+            self.hp -= 5
+        return
         
         
 
@@ -186,13 +193,38 @@ class Boss1(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = (200, 200)
 
-    def update():
-        pass    
+        self.tiro = [False, False]
+        self.cd = 0
+        self.contagem = 0
+
+    def update(self):
+        self.tiro = [False, False]
+
+        self.cd += self.clock.get_time()/1000
+
+        if self.cd >= 6:
+            if self.contagem == 0:
+                self.tiro = [True, False]
+                self.contagem += 1
+            elif self.contagem == 1:
+                self.tiro = [False, True]
+                self.contagem += 1
+            elif self.contagem == 2:
+                self.tiro = [True, True]
+                self.contagem = 0
+            self.cd = 0   
+
 
     def colide_com_tiros(self, boss, tiros):
         colisoes = pygame.sprite.spritecollide(boss, tiros, True)
         for i in colisoes:
             self.hp -= 5
+        if self.hp <= 0:
+            boss.kill()
+            return False
+        return True
+    
+
 
         
 

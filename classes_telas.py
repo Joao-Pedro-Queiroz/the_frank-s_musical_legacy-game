@@ -22,6 +22,7 @@ class RoomBegin:
         self.sprites = pygame.sprite.Group()
         self.tiros = pygame.sprite.Group()
         self.boss = pygame.sprite.Group()
+        self.tiros_boss = pygame.sprite.Group()
 
         self.personagem = Jogador(assets, clock)
         self.sprites.add(self.personagem)
@@ -31,6 +32,26 @@ class RoomBegin:
 
         self.fire_rate = 300
         self.count_fr = 0
+
+        self.tiro_circular = []
+        for i in range(9):
+
+            j = i
+
+            i += 1
+            i *= 20
+
+            j *= 20
+
+            self.tiro_circular.append(i)
+            self.tiro_circular.append(j * (-1))
+
+        self.tiro_horizontal = []
+        for i in range (6):
+             i += 1
+
+             self.tiro_horizontal.append(int((self.altura_tela/5)* i))
+        
 
 
     def atualiza_estado(self):
@@ -57,9 +78,25 @@ class RoomBegin:
 
         self.tiros.update()
 
+        self.boss.update()
+
         self.boss1.colide_com_tiros(self.boss1, self.tiros)
 
-        print(self.boss1.hp)
+        if self.boss1.tiro[0]:
+            for angle in self.tiro_circular:
+                self.tiros_boss.add(Tiro_boss((self.boss1.rect.x, self.boss1.rect.y), self.assets, self.dimen, self.clock, angle))
+
+        if self.boss1.tiro[1]:
+            for pos_y in self.tiro_horizontal:
+
+                pos_y -= 60
+        
+                self.tiros_boss.add(Tiro_boss((-10, pos_y), self.assets, self.dimen, self.clock, 0))
+
+        self.personagem.colide_com_tiros(self.tiros_boss)
+
+        self.tiros_boss.update()
+
 
         return 0
 
@@ -76,6 +113,7 @@ class RoomBegin:
 
         self.tiros.draw(window)
         self.sprites.draw(window)
+        self.tiros_boss.draw(window)
         self.boss.draw(window)
 
         pygame.display.update() # Atualiza a janela do jogo
