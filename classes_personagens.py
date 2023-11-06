@@ -163,6 +163,12 @@ class Jogador(pygame.sprite.Sprite):
         return True
 
     def colide_com_tiros(self, tiros):
+        '''
+        Função que verifica a colisão do jogador com um tiro do boss 
+
+        parâmetro self: representa a própria classe
+        paràmetro tiros: representa a lista de tiros que será testada a colisão
+        '''
         colisoes = pygame.sprite.spritecollide(self, tiros, True)
         for i in colisoes:
             self.hp -= 5
@@ -210,6 +216,11 @@ class Boss1(pygame.sprite.Sprite):
         self.vivo = True
 
     def update(self):
+        '''
+        Função que atualiza o Boss1
+
+        parâmetro self: representa a própria classe
+        '''
         self.tiro = [False, False]
 
         self.cd += self.clock.get_time()/1000
@@ -254,6 +265,13 @@ class Boss1(pygame.sprite.Sprite):
 
 class Heli(pygame.sprite.Sprite):
     def __init__(self, clock, pos):
+        '''
+        Função que define a classe Heli
+
+        parâmetro self: representa a própria classe
+        parâmetro clock: representa o tempo dos frames
+        paràmetro pos: representa a posição do helicóptero
+        '''
         pygame.sprite.Sprite.__init__(self)
 
         self.frames = []
@@ -271,6 +289,11 @@ class Heli(pygame.sprite.Sprite):
         self.max_frames = 7
 
     def update(self):
+        '''
+        Função que atualiza o Heli
+
+        parâmetro self: representa a própria classe
+        '''
 
         self.cronometro += self.clock.get_time()
         self.frame = self.cronometro//100
