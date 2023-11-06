@@ -81,6 +81,8 @@ class Jogador(pygame.sprite.Sprite):
         self.frame = 0
         self.max_frames = 4
         self.animation = 0
+
+        self.hp = 50
         
     def update(self):
         '''
@@ -156,6 +158,15 @@ class Jogador(pygame.sprite.Sprite):
         self.personagem = pygame.image.load(f"Sprites/Player/{self.state}/{self.facing}/{self.frame}.png")
         self.image  = pygame.transform.scale_by(self.personagem, 6)
 
+        if self.hp <= 0:
+            return False
+        return True
+
+    def colide_com_tiros(self, tiros):
+        colisoes = pygame.sprite.spritecollide(self, tiros, True)
+        for i in colisoes:
+            self.hp -= 5
+        return
         
         
 
@@ -180,14 +191,47 @@ class Boss1(pygame.sprite.Sprite):
 
         self.hp = 1000
 
-        self.sprite = pygame.image.load("Sprites/Maps/1.png")
-        self.image = pygame.transform.scale(self.sprite, (200, 200))
+        self.sprite = pygame.image.load("Sprites/Bosses/Boss1/1.png")
+        self.image = pygame.transform.scale_by(self.sprite, 5)
 
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = (200, 200)
 
-    def update():
-        pass    
+        self.tiro = [False, False]
+        self.cd = 0
+        self.contagem = 0
+
+        self.animation = 0
+        self.frame = 0
+        self.max_frames = 4
+
+        self.teste = pygame.Rect(self.rect.x + self.rect.w/100 * 29, self.rect.y + self.rect.h/100 * 77.5, 1,1)
+
+        self.vivo = True
+
+    def update(self):
+        self.tiro = [False, False]
+
+        self.cd += self.clock.get_time()/1000
+
+        if self.cd >= 6:
+            if self.contagem == 0:
+                self.tiro = [True, False]
+                self.contagem += 1
+            elif self.contagem == 1:
+                self.tiro = [False, True]
+                self.contagem += 1
+            elif self.contagem == 2:
+                self.tiro = [True, True]
+                self.contagem = 0
+            self.cd = 0
+            
+        self.animation += self.clock.get_time()
+        self.frame = self.animation//150
+        self.frame = (self.frame % self.max_frames) + 1
+
+        self.personagem = pygame.image.load(f"Sprites/Bosses/Boss1/{self.frame}.png")
+        self.image = pygame.transform.scale_by(self.personagem, 5)
 
     def colide_com_tiros(self, boss, tiros):
         '''
@@ -198,9 +242,41 @@ class Boss1(pygame.sprite.Sprite):
         paràmetro tiros: representa a lista de tiros que será testada a colisão
         '''
 
-        colisoes = pygame.sprite.spritecollide(boss, tiros, True)
-        for i in colisoes:
+        colisoes = pygame.sprite.groupcollide(boss, tiros, False, True)
+        for i in colisoes.values():
             self.hp -= 5
+        if self.hp <= 0:
+            self.kill()
+            self.vivo = False
+            return False
+        return True
+    
+
+class Heli(pygame.sprite.Sprite):
+    def __init__(self, clock, pos):
+        pygame.sprite.Sprite.__init__(self)
+
+        self.frames = []
+        for i in range(8):
+            sprite = pygame.image.load(f"Sprites/Bosses/Boss1/Heli/{i + 1}.png")
+
+            self.frames.append(pygame.transform.scale_by(sprite, 2.5))
+        
+        self.image = self.frames[0]
+        self.rect = self.image.get_rect()
+        self.clock = clock
+        self.rect.x, self.rect.y = pos
+        self.frame = 0
+        self.cronometro = 0
+        self.max_frames = 7
+
+    def update(self):
+
+        self.cronometro += self.clock.get_time()
+        self.frame = self.cronometro//100
+        self.frame = (self.frame % self.max_frames) + 1
+
+        self.image = self.frames[self.frame]
 
         
 

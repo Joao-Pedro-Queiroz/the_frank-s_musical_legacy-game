@@ -13,8 +13,7 @@ class Jogo:
 
         WIDTH, HEIGHT = pygame.display.Info().current_w, pygame.display.Info().current_h
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
-        self.window_dimen = (WIDTH, HEIGHT)
-        print(self.window_dimen)
+        self.window_dimen = (self.screen.get_width(), self.screen.get_height())
         self.current_screen_index = 0
         self.clock = pygame.time.Clock()
         pygame.display.set_caption('Jogo dourado') # Define o título da janela
