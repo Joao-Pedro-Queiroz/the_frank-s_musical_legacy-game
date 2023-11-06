@@ -23,18 +23,33 @@ class RoomBegin:
         self.tiros = pygame.sprite.Group()
         self.boss = pygame.sprite.Group()
         self.tiros_boss = pygame.sprite.Group()
+        self.tiros_boss_frente = pygame.sprite.Group()
+        self.tiros_boss_tras = pygame.sprite.Group()
+        self.helis = pygame.sprite.Group()
+
+        self.tiros_da_frente = [(95, 77.5), (73, 77.5), (51, 77.5), (51, 77.5), (29, 77.5), (7, 77.5)]
 
         self.personagem = Jogador(assets, clock)
         self.sprites.add(self.personagem)
-        
         self.boss1 = Boss1(self.dimen, self.clock, self.assets)
+        self.ui = UI(self.personagem, self.boss1, 1)
         self.boss.add(self.boss1)
 
         self.fire_rate = 300
         self.count_fr = 0
 
-        self.tiro_circular = []
+        self.pos_tiro_circular_i = [(100, 69), (95, 77.5), (73, 77.5), (51, 77.5), (51, 77.5), (29, 77.5), (7, 77.5), (0, 69), (0, 69)]
+        self.pos_tiro_circular_j = [(100, 69), (100, 69), (95, 60), (73, 60), (51, 60), (51, 60), (29, 60), (7, 60), (0, 69)]
+
+        self.fase = pygame.image.load("Sprites/Maps/1.png")
+        self.fase = pygame.transform.scale(self.fase, (self.largura_tela, self.altura_tela))
+
+        self.helis_pos = []
+
+        self.tiro_circular = {}
         for i in range(9):
+
+            k = i
 
             j = i
 
@@ -43,15 +58,22 @@ class RoomBegin:
 
             j *= 20
 
-            self.tiro_circular.append(i)
-            self.tiro_circular.append(j * (-1))
+            self.tiro_circular[i] = self.pos_tiro_circular_i[k]
+            self.tiro_circular[j * (-1)] = self.pos_tiro_circular_j[k]
 
         self.tiro_horizontal = []
         for i in range (6):
-             i += 1
+            i += 1
+            if i != 1:
+                self.tiro_horizontal.append(int((self.altura_tela/5)* i))
+                self.helis_pos.append(int((self.altura_tela/5)* i))
 
-             self.tiro_horizontal.append(int((self.altura_tela/5)* i))
-        
+        for pos_y in self.helis_pos:
+            pos_y -= 120
+            heli = Heli(self.clock, (10, pos_y))
+            self.helis.add(heli)
+
+        self.ritmo = rythm(self.clock, 170, '1010101010101011')
 
 
     def atualiza_estado(self):
@@ -61,11 +83,16 @@ class RoomBegin:
         parâmetro self: representa a própria classe
         '''
 
+        self.ritmo.update()
+
+        self.helis.update()
+
         for event in pygame.event.get(pygame.QUIT): # Retorna uma lista com todos os eventos que ocorreram desde a última vez que essa função foi chamada
             if event.type == pygame.QUIT: 
                 return -1
             
-        self.personagem.update()
+        if not self.personagem.update():
+            return -1
 
         if pygame.mouse.get_pressed()[0]:
             if self.count_fr == 0:
@@ -80,23 +107,37 @@ class RoomBegin:
 
         self.boss.update()
 
-        self.boss1.colide_com_tiros(self.boss1, self.tiros)
+        if not self.boss1.vivo:
+            return 1
+
+        self.boss1.colide_com_tiros(self.boss, self.tiros)
 
         if self.boss1.tiro[0]:
-            for angle in self.tiro_circular:
-                self.tiros_boss.add(Tiro_boss((self.boss1.rect.x, self.boss1.rect.y), self.assets, self.dimen, self.clock, angle))
+            for angle, pos in self.tiro_circular.items():
+
+                tiro = Tiro_boss((self.boss1.rect.x + self.boss1.rect.w/100 * pos[0], self.boss1.rect.y + self.boss1.rect.h/100 * pos[1]), self.assets, self.dimen, self.clock, angle)
+
+                self.tiros_boss.add(tiro)
+
+                if pos in self.tiros_da_frente:
+                    self.tiros_boss_frente.add(tiro)
+                else:
+                    self.tiros_boss_tras.add(tiro)
 
         if self.boss1.tiro[1]:
             for pos_y in self.tiro_horizontal:
 
-                pos_y -= 60
-        
-                self.tiros_boss.add(Tiro_boss((-10, pos_y), self.assets, self.dimen, self.clock, 0))
+                pos_y -= 80
+
+                tiro = Tiro_boss((90, pos_y), self.assets, self.dimen, self.clock, 0)
+                self.tiros_boss_frente.add(tiro)
+                self.tiros_boss.add(tiro)
 
         self.personagem.colide_com_tiros(self.tiros_boss)
 
-        self.tiros_boss.update()
+        self.ui.update()
 
+        self.tiros_boss.update()
 
         return 0
 
@@ -111,10 +152,23 @@ class RoomBegin:
 
         window.fill((0, 0, 0)) # Prrenche a janela do jogo com a cor preta
 
+        window.blit(self.fase, (0,0))
+
+        self.helis.draw(window)
         self.tiros.draw(window)
         self.sprites.draw(window)
-        self.tiros_boss.draw(window)
+        self.tiros_boss_tras.draw(window)
         self.boss.draw(window)
+        self.tiros_boss_frente.draw(window)
+
+        pygame.draw.rect(window, (255,255,255), self.ritmo.main_bar)
+
+        for pos in self.ritmo.bars:
+            pygame.draw.rect(window, (255,0,0), (pos[0], pos[1], 5, 100))
+
+        pygame.draw.rect(window, (255,255,255), self.boss1.teste)
+
+        self.ui.draw(window)
 
         pygame.display.update() # Atualiza a janela do jogo
 
