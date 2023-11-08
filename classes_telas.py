@@ -2,7 +2,79 @@ import pygame
 from classes_personagens import *
 from classes_objetos import *
 
-class RoomBegin:
+class Start:
+    def __init__(self, dimen, clock, assets):
+
+        self.fase = pygame.image.load("Sprites/Maps/first.png")
+
+        self.largura_tela = dimen[0]
+        self.altura_tela = dimen[1]
+
+        self.fase = pygame.transform.scale(self.fase, (self.largura_tela, self.altura_tela))
+
+        self.dimen = dimen
+
+        self.clock = clock
+        self.assets = assets
+
+        self.sprite = pygame.sprite.Group()
+
+        self.player = Jogador(assets, self.clock, False)
+
+        self.sprite.add(self.player)
+
+        self.player.rect.x, self.player.rect.y = (self.largura_tela//2 - self.player.rect.w + 13, 600)
+
+        self.player.size = 10
+
+        self.ritmo = Rythm(self.clock, 223, '1011001010110110', 'Sounds/introd_2.wav', 'Sounds/loop_2.wav')
+
+    def update(self):
+
+        for event in pygame.event.get(pygame.QUIT): # Retorna uma lista com todos os eventos que ocorreram desde a última vez que essa função foi chamada
+            if event.type == pygame.QUIT: 
+                return -2
+            
+        teclas = pygame.key.get_pressed()
+
+        if teclas[pygame.K_ESCAPE]:
+            return -1
+            
+        self.ritmo.update()
+
+        self.sprite.update()
+
+        if self.ritmo.acertou_ritmo == 4:
+            self.player.vel_y = 100
+            self.player.control_facing = False
+            self.player.facing = 'Back'
+
+        if self.player.rect.y > self.altura_tela:
+            return 1
+
+        return 0
+
+    def draw(self, window):
+
+        window.fill((0, 0, 0))
+
+        window.blit(self.fase, (0,0))
+
+        self.sprite.draw(window)
+
+        # pygame.draw.rect(window, (255,255,255), self.ritmo.main_bar)
+        # pygame.draw.rect(window, (255,255,255), self.ritmo.second_bar)
+
+        # for pos in self.ritmo.bars:
+        #     pygame.draw.rect(window, (255,0,0), (pos[0], pos[1], 5, 100))
+
+        pygame.display.update()
+
+
+        
+
+
+class RoomBoss1:
     def __init__(self, dimen, clock, assets):
         '''
         Função que define a classe RoomBegin
@@ -12,6 +84,7 @@ class RoomBegin:
         parâmetro clock: representa o tempo dos frames
         paràmetro assets: dicionário com alguns valores importantes para o jogo
         '''
+
         self.largura_tela = dimen[0]
         self.altura_tela = dimen[1]
 
@@ -26,10 +99,12 @@ class RoomBegin:
         self.tiros_boss_frente = pygame.sprite.Group()
         self.tiros_boss_tras = pygame.sprite.Group()
         self.helis = pygame.sprite.Group()
+        self.shield_group = pygame.sprite.Group()
+        self.shockwave_group = pygame.sprite.Group()
 
         self.tiros_da_frente = [(95, 77.5), (73, 77.5), (51, 77.5), (51, 77.5), (29, 77.5), (7, 77.5)]
 
-        self.personagem = Jogador(assets, clock)
+        self.personagem = Jogador(assets, clock, True)
         self.sprites.add(self.personagem)
         self.boss1 = Boss1(self.dimen, self.clock, self.assets)
         self.ui = UI(self.personagem, self.boss1, 1)
@@ -73,10 +148,17 @@ class RoomBegin:
             heli = Heli(self.clock, (10, pos_y))
             self.helis.add(heli)
 
-        self.ritmo = rythm(self.clock, 170, '1010101010101011')
+        self.ritmo = Rythm(self.clock, 224, '10100110', 'Sounds/introd.wav', 'Sounds/loop.wav')
+
+        self.paredes = [(87,200,25,1000), (1490,200,25,1000), (87,130,1500,30), (87,self.altura_tela,1500,30)]
+        self.paredes_info = ['esquerda', 'direita', 'cima', 'baixo']
+        self.paredes_sprite = []
+
+        for parede, info in zip(self.paredes, self.paredes_info):
+            self.paredes_sprite.append(Parede(parede[0], parede[1], parede[2], parede[3], info))
 
 
-    def atualiza_estado(self):
+    def update(self):
         '''
         Função que atualiza a tela do RoomBegin
 
@@ -89,7 +171,12 @@ class RoomBegin:
 
         for event in pygame.event.get(pygame.QUIT): # Retorna uma lista com todos os eventos que ocorreram desde a última vez que essa função foi chamada
             if event.type == pygame.QUIT: 
-                return -1
+                return -2
+            
+        teclas = pygame.key.get_pressed()
+
+        if teclas[pygame.K_ESCAPE]:
+            return -1
             
         if not self.personagem.update():
             return -1
@@ -108,7 +195,8 @@ class RoomBegin:
         self.boss.update()
 
         if not self.boss1.vivo:
-            return 1
+            # return 1
+            pass
 
         self.boss1.colide_com_tiros(self.boss, self.tiros)
 
@@ -139,10 +227,34 @@ class RoomBegin:
 
         self.tiros_boss.update()
 
-        return 0
+        if self.ritmo.acertou_ritmo == 4 and len(self.shield_group.sprites()) == 0:
+            self.shield = Shield(self.personagem, self.clock)
+            self.shield_group.add(self.shield)
+
+        if self.ritmo.acertou_ritmo > 4 and self.ritmo.acertou_ritmo % 4 == 0:
+            self.shockwave = Shockwave(self.personagem, self.clock, self.dimen)
+            self.shockwave_group.add(self.shockwave)
+            self.ritmo.acertou_ritmo = 4
+
+        if self.ritmo.acertou_ritmo < 4 and len(self.shield_group.sprites()) != 0:
+            self.shield.ativo = False
+        
+        if len(self.shield_group.sprites()) == 1:     
+            self.shield_group.update()
+            self.shield.colide_com_tiros(self.shield_group, self.tiros_boss)
+
+        self.shockwave_group.update()
+
+        for parede in self.paredes_sprite:
+            parede.colide_com_player(self.personagem)
+        
+        if len(self.shockwave_group.sprites()) > 0:
+            self.boss1.colide_com_shockwave(self.shockwave)
+
+        return 1
 
     
-    def desenha(self, window):
+    def draw(self, window):
         '''
         Função que desenha a tela do jogo
 
@@ -157,16 +269,21 @@ class RoomBegin:
         self.helis.draw(window)
         self.tiros.draw(window)
         self.sprites.draw(window)
+        if len(self.shield_group.sprites()) == 1:     
+            self.shield_group.draw(window)
         self.tiros_boss_tras.draw(window)
         self.boss.draw(window)
         self.tiros_boss_frente.draw(window)
 
-        pygame.draw.rect(window, (255,255,255), self.ritmo.main_bar)
+        # pygame.draw.rect(window, (255,255,255), self.ritmo.main_bar)
+        # pygame.draw.rect(window, (255,255,255), self.ritmo.second_bar)
 
-        for pos in self.ritmo.bars:
-            pygame.draw.rect(window, (255,0,0), (pos[0], pos[1], 5, 100))
+        # for pos in self.ritmo.bars:
+        #     pygame.draw.rect(window, (255,0,0), (pos[0], pos[1], 5, 100))
 
         pygame.draw.rect(window, (255,255,255), self.boss1.teste)
+
+        self.shockwave_group.draw(window)
 
         self.ui.draw(window)
 

@@ -16,6 +16,7 @@ class Jogo:
         self.window_dimen = (self.screen.get_width(), self.screen.get_height())
         self.current_screen_index = 0
         self.clock = pygame.time.Clock()
+        self.clock.tick(60)
         pygame.display.set_caption('Jogo dourado') # Define o título da janela
 
         self.assets = {
@@ -23,7 +24,7 @@ class Jogo:
         }
         
         # self.telas = [RoomBegin(self.window_dimen, self.clock, self.assets), RoomBoss1(self.window_dimen, self.clock, self.assets), RoomBoss2(self.window_dimen, self.clock, self.assets), RoomBoss3(self.window_dimen, self.clock, self.assets), RoomFinal(self.window_dimen, self.clock, self.assets)]
-        self.telas = [RoomBegin(self.window_dimen, self.clock, self.assets)]
+        self.telas = [Start(self.window_dimen, self.clock, self.assets), RoomBoss1(self.window_dimen, self.clock, self.assets)]
 
     def game_loop(self):
         '''
@@ -37,12 +38,16 @@ class Jogo:
         tela_atual = self.telas[self.current_screen_index]
 
         while game:
-            self.current_screen_index = tela_atual.atualiza_estado()
+            self.current_screen_index = tela_atual.update()
 
             self.clock.tick(60)
 
             if self.current_screen_index == -1:
+                self.telas = [Start(self.window_dimen, self.clock, self.assets), RoomBoss1(self.window_dimen, self.clock, self.assets)]
+                self.current_screen_index = 0
+                tela_atual = self.telas[self.current_screen_index]
+            if self.current_screen_index == -2:
                 game = False
             else:
                 tela_atual = self.telas[self.current_screen_index]
-                tela_atual.desenha(self.screen)
+                tela_atual.draw(self.screen)

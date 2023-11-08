@@ -106,7 +106,7 @@ class Tiro_boss(pygame.sprite.Sprite):
 
 
 class Parede(pygame.sprite.Sprite):
-    def __init__(self, pos_x, pos_y, largura, altura):
+    def __init__(self, pos_x, pos_y, largura, altura, direcao):
         '''
         Função que define a classe Parede
 
@@ -115,18 +115,31 @@ class Parede(pygame.sprite.Sprite):
         parâmetro pos_y: representa a posição y do nato superior esquerdo da parede
         parâmetro largura: representa a largura da parede
         parâmetro altura: representa a altura da parede
-        ''' 
+        '''
+
+        self.direcao = direcao
     
         pygame.sprite.Sprite.__init__(self)
 
-        self.rect = pygame.Rect(pos_x, pos_y, largura, altura)
+        self.image = pygame.Surface((largura, altura)).fill((0,0,255))
 
+        self.rect = pygame.rect.Rect(pos_x, pos_y, largura, altura)
 
-    def update(self):
-        pass
-    
-    def desenha_paredes_contorno(self, window):
-        pass
+    def colide_com_player(self, player):
+        if self.rect.colliderect(player.rect):
+            if self.direcao == 'direita':
+                if player.vel_x > 0:
+                    player.vel_x = -1
+            if self.direcao == 'esquerda':
+                if player.vel_x < 0:
+                    player.vel_x = 1
+            if self.direcao == 'baixo':
+                if player.vel_y > 0:
+                    player.vel_y = 1
+            if self.direcao == 'cima':
+                if player.vel_y < 0:
+                                        player.vel_y = -1
+
 
 class Hazzard(pygame.sprite.Sprite):
     def __init__(self, dimen, clock, assets):
@@ -149,22 +162,27 @@ class Hazzard(pygame.sprite.Sprite):
     def desenha(self, window):
         pass
 
-class rythm():
-    def __init__(self, clock, bpm, bin):
+class Rythm():
+    def __init__(self, clock, bpm, bin, introd, loop):
 
         self.clock = clock
         self.bpm = bpm
         self.bin = bin
+        self.loop = loop
+        self.introd = introd
+        self.load = True
 
         self.metronomo = pygame.mixer.Sound("audio/batida_metronomo.wav")
 
         self.vel = -(bpm//6)
 
-        self.tolerance = 20
+        self.tolerance = 50
 
         self.spacing = 100
 
-        self.main_bar = pygame.Rect(self.tolerance*(-1), 0, self.tolerance*2, 30)
+        self.main_bar = pygame.Rect(0, 0, self.tolerance + 40, 30)
+
+        # self.tolerance += 10
 
         self.bars = []
 
@@ -172,11 +190,11 @@ class rythm():
             i += 1
 
             if boolean == '1':
-                self.bars.append([self.tolerance + (i*self.spacing), 0])
+                self.bars.append([self.tolerance*2 + (i*self.spacing), 0])
 
-        self.end = self.spacing * (len(bin)-1)
+        self.end = (self.spacing * (len(bin)))
 
-        self.toca_uma_vez = True
+        self.second_bar = pygame.Rect(self.end - self.tolerance - 40, 0, self.tolerance + 40, 30)
 
         self.bpm = 0
 
@@ -189,7 +207,21 @@ class rythm():
         self.errado = False
         self.dentro_do_tempo = True
 
+        self.start_music = False
+        self.toca_uma_vez = True
+        self.barra_recente = 0
+
     def update(self):
+
+        if self.load:
+            pygame.mixer.music.load(self.introd)
+            self.load = False
+
+        self.cronometro += self.clock.get_time()
+        if self.cronometro >= 1000 * 60:
+            self.bpm = 0
+            self.cronometro = 0
+            
 
         self.errado = False
         self.dentro_do_tempo = False
@@ -201,12 +233,42 @@ class rythm():
         else:
             self.p_input = 0
 
+        if self.bars[0][0] <= self.tolerance*2.2:
+            if not self.start_music:
+                pygame.mixer.music.play()
+                pygame.mixer.music.queue(self.loop, "",-1)
+                self.start_music = True
+
         for i in range(len(self.bars)):
             self.bars[i][0] = self.bars[i][0] + self.vel * self.clock.get_time()/100
-            if self.bars[i][0] < (self.spacing) * (-1):
-                self.bars[i][0] = self.end
+            if self.bars[i][0] <= 0:
+                self.bars[i][0] = self.end + self.bars[i][0]
+                self.toca_uma_vez = True
+
+            if self.bars[i][0] <= self.end - self.tolerance and self.bars[i][0] >= self.tolerance:
                 self.acerta_uma_vez = True
+
+            if self.bars[i][0] <= self.tolerance:
+                if self.toca_uma_vez:
+                    # self.metronomo.play()
+                    self.bpm += 1
+                    # self.toca_uma_vez = False
+                
             if self.main_bar.collidepoint(self.bars[i]):
+
+                self.barra_recente = i
+
+                self.dentro_do_tempo = True
+                if self.p_input == 1 and self.acerta_uma_vez:
+                    self.acertou_ritmo += 1
+                    self.acerta_uma_vez = False
+                elif self.p_input == 1:
+                    self.errado = True
+
+            if self.second_bar.collidepoint(self.bars[i]):
+
+                self.barra_recente = i
+
                 self.dentro_do_tempo = True
                 if self.p_input == 1 and self.acerta_uma_vez:
                     self.acertou_ritmo += 1
@@ -218,11 +280,7 @@ class rythm():
             self.errado = True
         
         if self.errado:
-            self.acertou_ritmo = 0
-        
-        print(self.acertou_ritmo)
-
-                
+            self.acertou_ritmo = 0  
 
 class UI():
     def __init__(self, player, boss, index_boss):
@@ -250,6 +308,102 @@ class UI():
 
         window.blit(self.barra_de_vida, (1275, 900))
         window.blit(self.barra_de_vida_boss, (550, 80))
+
+class Shield(pygame.sprite.Sprite):
+    def __init__(self, player, clock):
+        pygame.sprite.Sprite.__init__(self)
+
+        self.clock = clock
+        self.player = player
+        self.cronometro = 0
+
+        self.current_sprite = 0
+        
+        self.sprites = []
+        for i in range(4):
+            i += 1
+            sprite = pygame.image.load(f"Sprites/Shield/{i}.png")
+            self.sprites.append(pygame.transform.scale_by(sprite, 6))
+        
+        self.image = self.sprites[self.current_sprite]
+
+        self.rect = self.image.get_rect()
+
+        self.rect.x, self.rect.y = (player.rect.x - 25, player.rect.y - 25)
+
+        self.ativo = True
+
+
+    def update(self):
+        self.cronometro += self.clock.get_time()
+
+        self.image = self.sprites[self.current_sprite]
+        self.rect.x, self.rect.y = (self.player.rect.x - 18, self.player.rect.y - 25)
+
+        if self.current_sprite == 3 and self.ativo:
+            self.cronometro = 0
+
+        if self.current_sprite == 0 and not self.ativo:
+            if self.cronometro >= 150:
+                self.kill()
+
+        if self.current_sprite != 3 and self.ativo:
+            if self.cronometro >= 150:
+                self.current_sprite += 1
+                self.cronometro = 0
+        
+        if self.current_sprite != 0 and not self.ativo:
+            if self.cronometro >= 150:
+                self.current_sprite -= 1
+                self.cronometro = 0
+    
+    def colide_com_tiros(self, shield, tiros):
+        colisoes = pygame.sprite.groupcollide(shield, tiros, False, True)
+    
+class Shockwave(pygame.sprite.Sprite):
+    def __init__(self, player, clock, dimen):
+        pygame.sprite.Sprite.__init__(self)
+
+        self.dimen = dimen
+        self.clock = clock
+        self.player = player
+
+        self.center_player = (self.player.rect.x + self.player.rect.w//2, self.player.rect.y + self.player.rect.h//2)
+
+        self.radius = 1
+
+        self.sprite = pygame.image.load("Sprites/Projectiles/shockwave.png")
+        self.image = pygame.transform.scale(self.sprite, (self.radius*2, self.radius*2))
+
+        self.rect = self.image.get_rect()
+        self.rect.x = self.center_player[0] - self.radius
+        self.rect.y = self.center_player[1] - self.radius
+
+        self.cronometro = 0
+
+        self.hit = False
+    
+    def update(self):
+        self.cronometro += self.clock.get_time()
+        if self.cronometro >= 5:
+            self.radius += self.radius/5 + 30
+        
+        self.image = pygame.transform.scale(self.sprite, (self.radius*2, self.radius*2))
+
+        self.rect = self.image.get_rect()
+        self.rect.x = self.center_player[0] - self.radius
+        self.rect.y = self.center_player[1] - self.radius
+
+        if self.radius > self.dimen[0]:
+            self.kill()
+
+    
+
+
+
+
+
+
 
 
 

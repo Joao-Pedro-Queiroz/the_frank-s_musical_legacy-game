@@ -48,7 +48,7 @@ def player_facing(angle):
 
 class Jogador(pygame.sprite.Sprite):
 
-    def __init__(self, assets, clock):
+    def __init__(self, assets, clock, moves):
         '''
         Função que define a classe Jogador
 
@@ -60,20 +60,26 @@ class Jogador(pygame.sprite.Sprite):
 
         pygame.sprite.Sprite.__init__(self)
 
+        self.moves = moves
+        
+        self.size = 6
+
         self.clock = clock
         self.assets = assets
 
         self.sprite = pygame.image.load(r"Sprites\Player\Standing\Back\1.png")
 
-        self.image = pygame.transform.scale_by(self.sprite, 6)
+        self.image = pygame.transform.scale_by(self.sprite, self.size)
 
         self.rect = self.image.get_rect()
 
-        self.rect.x, self.rect.y = [100,100]
+        self.rect.x, self.rect.y = [500,500]
 
         self.vel_x = 0
         self.vel_y = 0
         self.mov_player = []
+
+        self.control_facing = True
 
         self.state = "Standing"
         self.facing = 'Back'
@@ -91,40 +97,41 @@ class Jogador(pygame.sprite.Sprite):
         parâmetro self: representa a própria classe
         '''
 
-        for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_w:
-                    self.mov_player.append('forward')
-                if event.key == pygame.K_a:
-                    self.mov_player.append('left')
-                if event.key == pygame.K_s:
-                    self.mov_player.append('back')
-                if event.key == pygame.K_d:
-                    self.mov_player.append('right')
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_w:
-                    self.mov_player.remove('forward')
-                if event.key == pygame.K_a:
-                    self.mov_player.remove('left')
-                if event.key == pygame.K_s:
-                    self.mov_player.remove('back')
-                if event.key == pygame.K_d:
-                    self.mov_player.remove('right')
-
         self.rect.x, self.rect.y = movimenta_player(self.rect.x, self.rect.y, self.vel_x, self.vel_y, self.clock)
 
-        self.vel_y = 0
-        self.vel_x = 0
-        
-        if 'forward' in self.mov_player: self.vel_y = -250
-        if 'back' in self.mov_player: self.vel_y = 250
-        if 'right' in self.mov_player: self.vel_x = 250
-        if 'left' in self.mov_player: self.vel_x = -250
+        if self.moves:
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_w:
+                        self.mov_player.append('forward')
+                    if event.key == pygame.K_a:
+                        self.mov_player.append('left')
+                    if event.key == pygame.K_s:
+                        self.mov_player.append('back')
+                    if event.key == pygame.K_d:
+                        self.mov_player.append('right')
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_w:
+                        self.mov_player.remove('forward')
+                    if event.key == pygame.K_a:
+                        self.mov_player.remove('left')
+                    if event.key == pygame.K_s:
+                        self.mov_player.remove('back')
+                    if event.key == pygame.K_d:
+                        self.mov_player.remove('right')
 
-        if 'forward' in self.mov_player and 'back' in self.mov_player:
             self.vel_y = 0
-        if 'left' in self.mov_player and 'right' in self.mov_player:
             self.vel_x = 0
+            
+            if 'forward' in self.mov_player: self.vel_y = -250
+            if 'back' in self.mov_player: self.vel_y = 250
+            if 'right' in self.mov_player: self.vel_x = 250
+            if 'left' in self.mov_player: self.vel_x = -250
+
+            if 'forward' in self.mov_player and 'back' in self.mov_player:
+                self.vel_y = 0
+            if 'left' in self.mov_player and 'right' in self.mov_player:
+                self.vel_x = 0
         
         if self.vel_y != 0 or self.vel_x != 0:
             newstate = 'Walking'
@@ -147,7 +154,8 @@ class Jogador(pygame.sprite.Sprite):
 
         angle = math.degrees(math.atan2(y_dist, -x_dist)) + 180
 
-        self.facing = player_facing(angle)
+        if self.control_facing:
+            self.facing = player_facing(angle)
 
         # Animação do personagem
 
@@ -156,7 +164,7 @@ class Jogador(pygame.sprite.Sprite):
         self.frame = (self.frame % self.max_frames) + 1
 
         self.personagem = pygame.image.load(f"Sprites/Player/{self.state}/{self.facing}/{self.frame}.png")
-        self.image  = pygame.transform.scale_by(self.personagem, 6)
+        self.image  = pygame.transform.scale_by(self.personagem, self.size)
 
         if self.hp <= 0:
             return False
@@ -209,29 +217,68 @@ class Boss1(pygame.sprite.Sprite):
 
         self.vivo = True
 
+        self.angle = 0
+
+        self.vel = 100
+
+        self.x_boss = 600
+        self.y_boss = 250
+
     def update(self):
-        self.tiro = [False, False]
+        if self.vivo:
+            self.tiro = [False, False]
 
-        self.cd += self.clock.get_time()/1000
+            self.cd += self.clock.get_time()/1000
 
-        if self.cd >= 6:
-            if self.contagem == 0:
-                self.tiro = [True, False]
-                self.contagem += 1
-            elif self.contagem == 1:
-                self.tiro = [False, True]
-                self.contagem += 1
-            elif self.contagem == 2:
-                self.tiro = [True, True]
-                self.contagem = 0
-            self.cd = 0
+            if self.cd >= 6:
+                if self.contagem == 0:
+                    self.tiro = [True, False]
+                    self.contagem += 1
+                elif self.contagem == 1:
+                    self.tiro = [False, True]
+                    self.contagem += 1
+                elif self.contagem == 2:
+                    self.tiro = [True, True]
+                    self.contagem = 0
+                self.cd = 0
+                
+            self.animation += self.clock.get_time()
+            self.frame = self.animation//150
+            self.frame = (self.frame % self.max_frames) + 1
+
+            self.personagem = pygame.image.load(f"Sprites/Bosses/Boss1/{self.frame}.png")
+            self.image = pygame.transform.scale_by(self.personagem, 5)
+
+            self.vel_x = self.vel * math.cos(math.radians(self.angle))
+            self.vel_y = self.vel * math.sin(math.radians(self.angle))
+
+            self.x_boss = self.x_boss + self.vel_x * self.clock.get_time()/1000
+            self.y_boss = self.y_boss + self.vel_y * self.clock.get_time()/1000
+
+            self.rect.x = int(self.x_boss)
+            self.rect.y = int(self.y_boss)
+
+            self.angle += 1
+
+            if self.hp <= 0:
+                self.vivo = False
+                self.animation = 0 
+                self.frame = 0
+                
+
+        else:
+            self.animation += self.clock.get_time()
+
+            self.frame = self.animation//150
+
+            if self.frame >= 6:
+                self.frame = 6
             
-        self.animation += self.clock.get_time()
-        self.frame = self.animation//150
-        self.frame = (self.frame % self.max_frames) + 1
+            self.frame += 1
 
-        self.personagem = pygame.image.load(f"Sprites/Bosses/Boss1/{self.frame}.png")
-        self.image = pygame.transform.scale_by(self.personagem, 5)
+            self.personagem = pygame.image.load(f"Sprites/Bosses/Boss1/Dead/{self.frame}.png")
+            self.image = pygame.transform.scale_by(self.personagem, 5)
+
 
     def colide_com_tiros(self, boss, tiros):
         '''
@@ -245,11 +292,14 @@ class Boss1(pygame.sprite.Sprite):
         colisoes = pygame.sprite.groupcollide(boss, tiros, False, True)
         for i in colisoes.values():
             self.hp -= 5
-        if self.hp <= 0:
-            self.kill()
-            self.vivo = False
-            return False
-        return True
+        
+    
+    def colide_com_shockwave(self, shockwave):
+
+        if not shockwave.hit:
+            if pygame.sprite.collide_rect(self, shockwave):
+                self.hp -= 150
+                shockwave.hit = True
     
 
 class Heli(pygame.sprite.Sprite):
@@ -271,7 +321,6 @@ class Heli(pygame.sprite.Sprite):
         self.max_frames = 7
 
     def update(self):
-
         self.cronometro += self.clock.get_time()
         self.frame = self.cronometro//100
         self.frame = (self.frame % self.max_frames) + 1
