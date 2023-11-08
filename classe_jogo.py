@@ -16,8 +16,9 @@ class Jogo:
         self.window_dimen = (self.screen.get_width(), self.screen.get_height())
         self.current_screen_index = 0
         self.clock = pygame.time.Clock()
+
         self.clock.tick(60)
-        pygame.display.set_caption('Jogo dourado') # Define o título da janela
+        pygame.display.set_caption("The Frank's musical legacy") # Define o título da janela
 
         self.assets = {
             'fonte_padrao': pygame.font.get_default_font()

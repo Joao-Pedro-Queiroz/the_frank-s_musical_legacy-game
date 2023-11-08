@@ -342,37 +342,17 @@ class RoomBoss1:
 #         pygame.display.update() # Atualiza a janela do jogo
 
 
-# class RoomBoss3:
+# class RoomFinal:
 #     def __init__(self, dimen, clock, assets):
 #         self.largura_tela = dimen[0]
 #         self.altura_tela = dimen[1]
-#         self.fundo = pygame.image.load(f"Sprites/Maps/3.png")
-
+#         self.fase = pygame.image.load("Sprites/Maps/3.png")
+#         self.fase = pygame.transform.scale(self.fase, (self.largura_tela, self.altura_tela))
 #         self.paredes =  pygame.sprite.Group()
 #         self.paredes.add(Parede(0, self.altura_tela // 4, self.largura_tela, 2))
 #         self.paredes.add(Parede(0, self.altura_tela - 1, self.largura_tela, 1))
 #         self.paredes.add(Parede(0, self.altura_tela // 4, 1, self.altura_tela - self.altura_tela // 4))
 #         self.paredes.add(Parede(self.largura_tela - 1, self.altura_tela // 4, 1, self.altura_tela - self.altura_tela // 4))
-       
-
-#     def atualiza_estado(self):
-#         for event in pygame.event.get(): # Retorna uma lista com todos os eventos que ocorreram desde a última vez que essa função foi chamada
-#             if event.type == pygame.QUIT: 
-#                 return -1
-            
-#         return 3
-
-    
-#     def desenha(self, window):
-#         window.fill((0, 0, 0)) # Preenche a janela do jogo com a cor preta
-
-#         pygame.display.update() # Atualiza a janela do jogo
-
-
-# class RoomFinal:
-#     def __init__(self, dimen, clock, assets):
-#         self.largura_tela = dimen[0]
-#         self.altura_tela = dimen[1]
         
 
 #     def atualiza_estado(self):
@@ -380,7 +360,7 @@ class RoomBoss1:
 #             if event.type == pygame.QUIT: 
 #                 return -1
             
-#         return 4
+#         return 3
 
     
 #     def desenha(self, window):
@@ -402,7 +382,7 @@ class RoomBoss1:
 #             if event.type == pygame.QUIT: 
 #                 return -1
         
-#         return 5
+#         return 4
             
     
 #     def desenha(self, window):
@@ -427,7 +407,7 @@ class RoomBoss1:
 #             if event.type == pygame.QUIT: 
 #                 return -1
             
-#         return 6
+#         return 5
         
     
 #     def desenha(self, window):

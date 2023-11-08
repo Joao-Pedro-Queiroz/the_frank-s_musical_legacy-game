@@ -64,6 +64,16 @@ class Tiro(pygame.sprite.Sprite):
 
 class Tiro_boss(pygame.sprite.Sprite):
     def __init__(self, pos, assets, dimen, clock, angle):
+        '''
+        Função que define a classe Tiro_boss
+
+        parâmetro self: representa a própria classe
+        parâmetro pos: representa a posição d
+        parâmetro dimen: representa as dimensões da tela
+        parâmetro clock: representa o tempo dos frames
+        paràmetro assets: dicionário com alguns valores importantes para o jogo
+        parâmetro angle: representa o ângulo de visão do boss
+        '''
 
         pygame.sprite.Sprite.__init__(self)
 
@@ -89,6 +99,11 @@ class Tiro_boss(pygame.sprite.Sprite):
         self.y_bala = float(self.rect.y)
 
     def update(self):
+        '''
+        Função que atualiza o Tiro_boss
+
+        parâmetro self: representa a própria classe
+        '''
 
         if self.rect.x > self.dimen[0] or self.rect.x < 0:
             self.kill()
@@ -212,6 +227,11 @@ class Rythm():
         self.barra_recente = 0
 
     def update(self):
+        '''
+        Função que atualiza o rítmo
+
+        parâmetro self: representa a própria classe
+        '''
 
         if self.load:
             pygame.mixer.music.load(self.introd)
@@ -284,6 +304,14 @@ class Rythm():
 
 class UI():
     def __init__(self, player, boss, index_boss):
+        '''
+        Função que define a classe UI
+
+        parâmetro self: representa a própria classe
+        parâmetro player: representa o jogador
+        parâmetro boss: representa o boss
+        parâmetro index_boss: número do boss
+        '''
 
         self.player = player
         self.boss = boss
@@ -298,10 +326,21 @@ class UI():
         self.vida_boss = pygame.Rect(604, 108, 402, 50)
 
     def update(self):
+        '''
+        Função que atualiza o UI
+
+        parâmetro self: representa a própria classe
+        '''
         self.vida.w = int(self.player.hp * 5)
         self.vida_boss.w = int(self.boss.hp * 0.4 + 2)
 
     def draw(self, window):
+        '''
+        Função que desenha o UI
+
+        parâmetro self: representa a própria classe
+        parâmetro window: representa a janlea do jogo
+        '''
 
         pygame.draw.rect(window, (195,0,0), self.vida)
         pygame.draw.rect(window, (255,0,0), self.vida_boss)

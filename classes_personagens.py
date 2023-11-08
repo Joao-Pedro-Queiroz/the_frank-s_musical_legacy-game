@@ -171,6 +171,12 @@ class Jogador(pygame.sprite.Sprite):
         return True
 
     def colide_com_tiros(self, tiros):
+        '''
+        Função que verifica a colisão do jogador com um tiro do boss 
+
+        parâmetro self: representa a própria classe
+        paràmetro tiros: representa a lista de tiros que será testada a colisão
+        '''
         colisoes = pygame.sprite.spritecollide(self, tiros, True)
         for i in colisoes:
             self.hp -= 5
@@ -304,6 +310,13 @@ class Boss1(pygame.sprite.Sprite):
 
 class Heli(pygame.sprite.Sprite):
     def __init__(self, clock, pos):
+        '''
+        Função que define a classe Heli
+
+        parâmetro self: representa a própria classe
+        parâmetro clock: representa o tempo dos frames
+        paràmetro pos: representa a posição do helicóptero
+        '''
         pygame.sprite.Sprite.__init__(self)
 
         self.frames = []
@@ -321,6 +334,12 @@ class Heli(pygame.sprite.Sprite):
         self.max_frames = 7
 
     def update(self):
+        '''
+        Função que atualiza o Heli
+
+        parâmetro self: representa a própria classe
+        '''
+
         self.cronometro += self.clock.get_time()
         self.frame = self.cronometro//100
         self.frame = (self.frame % self.max_frames) + 1
@@ -333,21 +352,6 @@ class Boss2:
     def __init__(self, dimen, clock, assets):
         '''
         Função que define a classe Boss2
-
-        parâmetro self: representa a própria classe
-        parâmetro dimen: representa as dimensões da tela
-        parâmetro clock: representa o tempo dos frames
-        paràmetro assets: dicionário com alguns valores importantes para o jogo
-        '''
-
-        self.largura_tela = dimen[0]
-        self.altura_tela = dimen[1]
-
-
-class Boss3:
-    def __init__(self, dimen, clock, assets):
-        '''
-        Função que define a classe Boss3
 
         parâmetro self: representa a própria classe
         parâmetro dimen: representa as dimensões da tela
