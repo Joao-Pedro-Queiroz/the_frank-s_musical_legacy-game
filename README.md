@@ -13,7 +13,7 @@ Para desfrutar da experiência do jogo, é necessário baixar uma versão do Pyt
 
 ## Como jogar
 
-W -> Mover jogador para cima; S -> Mover jogador para baixo; A -> Mover jogador para esquerda; D -> Mover jogador para direita; BOTÂO ESQUERDO DO MOUSE -> Atirar; ESPAÇO -> Rítmo
+W -> Mover jogador para cima; S -> Mover jogador para baixo; A -> Mover jogador para esquerda; D -> Mover jogador para direita; BOTÂO ESQUERDO DO MOUSE -> Atirar; ESPAÇO -> Rítmo; ESC -> Reiniciar o jogo
 
 ## Colaboração extras
 
